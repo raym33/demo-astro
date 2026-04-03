@@ -140,6 +140,34 @@
 	color: var(--example-muted);
 }
 
+.example-site__footer-side {
+	display: grid;
+	justify-items: end;
+	gap: 0.6rem;
+}
+
+.example-site__social {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.55rem;
+}
+
+.example-site__social-item {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.3rem;
+	height: 2.3rem;
+	border: 1px solid var(--example-line);
+	border-radius: 999px;
+	background: color-mix(in srgb, var(--example-panel) 90%, transparent);
+	color: var(--example-ink);
+}
+
+.example-site__social-icon {
+	font-size: 1rem;
+}
+
 .examples-home {
 	display: grid;
 	gap: 1.1rem;

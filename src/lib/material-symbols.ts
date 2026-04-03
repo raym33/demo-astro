@@ -29,6 +29,7 @@ export const MATERIAL_SYMBOLS = [
 	'strategy',
 	'task_alt',
 	'timeline',
+	'twitter',
 	'tune',
 	'travel_explore',
 	'visibility',
@@ -98,6 +99,8 @@ const TASK_ALT =
 	'<circle cx="12" cy="12" r="9" /><path d="m8 12.3 2.2 2.2 5-5" />';
 const TIMELINE =
 	'<path d="M4 18h16" /><circle cx="7" cy="12" r="1.5" /><circle cx="12" cy="8" r="1.5" /><circle cx="17" cy="14" r="1.5" /><path d="M8.5 11 10.5 9" /><path d="m13.5 9 2 4" />';
+const TWITTER =
+	'<path d="M20 6.5c-.6.3-1.3.5-2 .6.7-.4 1.2-1 1.5-1.8-.7.4-1.4.7-2.1.8A3.4 3.4 0 0 0 11.6 9c0 .3 0 .6.1.9A9.6 9.6 0 0 1 5 6.8a3.4 3.4 0 0 0 1 4.5c-.5 0-1-.2-1.5-.4 0 1.7 1.2 3.1 2.8 3.4-.3.1-.7.1-1 .1h-.6c.4 1.4 1.7 2.4 3.2 2.5A6.9 6.9 0 0 1 4 18.3 9.7 9.7 0 0 0 9.3 20c6.4 0 9.9-5.2 9.9-9.8v-.5c.7-.4 1.3-1 1.8-1.7Z" />';
 const TUNE =
 	'<path d="M4 7h7" /><path d="M13 7h7" /><circle cx="12" cy="7" r="2" /><path d="M4 17h11" /><path d="M17 17h3" /><circle cx="16" cy="17" r="2" />';
 const EYE =
@@ -137,6 +140,7 @@ export const MATERIAL_SYMBOL_DEFINITIONS = {
 	strategy: { viewBox: VIEW_BOX, body: STRATEGY },
 	task_alt: { viewBox: VIEW_BOX, body: TASK_ALT },
 	timeline: { viewBox: VIEW_BOX, body: TIMELINE },
+	twitter: { viewBox: VIEW_BOX, body: TWITTER },
 	travel_explore: { viewBox: VIEW_BOX, body: COMPASS },
 	tune: { viewBox: VIEW_BOX, body: TUNE },
 	visibility: { viewBox: VIEW_BOX, body: EYE },
