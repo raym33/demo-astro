@@ -66,8 +66,8 @@ const examples = [
 	pageTitle="Preview Gallery"
 	description="Gallery of premium Astro site examples built from the capsule system."
 	variant="gallery"
-	primaryLabel="Open first example"
-	primaryUrl={examples[0].href}
+	primaryLabel="Browse all demos"
+	primaryUrl="#examples"
 	footerNote="Public example routes for the Astro demo repository."
 >
 	<section class="examples-home">
@@ -79,9 +79,15 @@ const examples = [
 				system, but each one pushes layout, tone, spacing, navigation, and market language in a
 				different direction.
 			</p>
+			<p class="examples-home__helper">Open any card below to view a full standalone website demo.</p>
+			<div class="examples-home__quicklinks" aria-label="Example routes">
+				{examples.map((example) => (
+					<a class="examples-home__quicklink" href={example.href}>{example.title}</a>
+				))}
+			</div>
 		</div>
 
-		<div class="examples-home__grid">
+		<div class="examples-home__grid" id="examples">
 			{examples.map((example) => (
 				<a class="examples-home__card" href={example.href}>
 					<p class="examples-home__card-label">{example.label}</p>
@@ -92,6 +98,7 @@ const examples = [
 							<span class="examples-home__tag">{tag}</span>
 						))}
 					</div>
+					<span class="examples-home__card-cta">Open demo</span>
 				</a>
 			))}
 		</div>
