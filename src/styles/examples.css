@@ -44,11 +44,22 @@
 	text-decoration: none;
 }
 
+.example-site__brand-row {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.55rem;
+}
+
 .example-site__brand-name {
 	font-size: 0.95rem;
 	font-weight: 800;
 	letter-spacing: 0.14em;
 	text-transform: uppercase;
+}
+
+.example-site__brand-icon {
+	font-size: 1rem;
+	color: var(--example-accent);
 }
 
 .example-site__tagline {
@@ -68,6 +79,7 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
+	gap: 0.5rem;
 	min-height: 2.55rem;
 	padding: 0.7rem 1rem;
 	border-radius: 999px;
@@ -84,6 +96,10 @@
 .example-site__header-cta {
 	background: var(--example-ink);
 	color: var(--example-canvas);
+}
+
+.example-site__header-cta-icon {
+	font-size: 0.95rem;
 }
 
 .example-site__main {
@@ -189,6 +205,7 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
+	gap: 0.5rem;
 	min-height: 2.45rem;
 	padding: 0.65rem 0.9rem;
 	border: 1px solid var(--example-line);
@@ -200,6 +217,10 @@
 	font-weight: 800;
 	letter-spacing: 0.1em;
 	text-transform: uppercase;
+}
+
+.examples-home__quicklink-icon {
+	color: var(--example-accent);
 }
 
 .examples-home__grid {
@@ -220,12 +241,19 @@
 }
 
 .examples-home__card-label {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.45rem;
 	margin: 0;
 	font-size: 0.75rem;
 	font-weight: 800;
 	letter-spacing: 0.14em;
 	text-transform: uppercase;
 	color: var(--example-accent);
+}
+
+.examples-home__card-label-icon {
+	font-size: 0.95rem;
 }
 
 .examples-home__card-title {
@@ -247,6 +275,7 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
+	gap: 0.45rem;
 	width: fit-content;
 	min-height: 2.25rem;
 	padding: 0.45rem 0.8rem;
@@ -257,6 +286,10 @@
 	font-weight: 800;
 	letter-spacing: 0.1em;
 	text-transform: uppercase;
+}
+
+.examples-home__card-cta-icon {
+	font-size: 0.95rem;
 }
 
 .examples-home__card-tags {

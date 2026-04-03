@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import SiteIcon from '../system/SiteIcon.astro';
 import '../../styles/examples.css';
 
 interface NavItem {
@@ -43,6 +44,18 @@ const {
 } = Astro.props;
 
 const title = `${siteName} — ${pageTitle}`;
+const variantIcons = {
+	northstar: 'monitoring',
+	'elm-ivory': 'auto_awesome',
+	harborcare: 'task_alt',
+	fieldstone: 'layers',
+	'briar-stone': 'flag',
+	brightpath: 'rocket_launch',
+	'saffron-house': 'travel_explore',
+	aureline: 'inventory_2',
+	gallery: 'grid_view',
+} as const;
+const variantIcon = variantIcons[variant];
 ---
 
 <Layout
@@ -56,7 +69,10 @@ const title = `${siteName} — ${pageTitle}`;
 			<div class="example-site__header-inner bw-shell">
 				<div class="example-site__brand">
 					<a class="example-site__brand-mark" href={homeUrl}>
-						<span class="example-site__brand-name">{siteName}</span>
+						<span class="example-site__brand-row">
+							<SiteIcon name={variantIcon} size="sm" className="example-site__brand-icon" />
+							<span class="example-site__brand-name">{siteName}</span>
+						</span>
 						{tagline ? <span class="example-site__tagline">{tagline}</span> : null}
 					</a>
 				</div>
@@ -71,7 +87,8 @@ const title = `${siteName} — ${pageTitle}`;
 
 				{primaryLabel ? (
 					<a class="example-site__header-cta" href={primaryUrl || '#contact'}>
-						{primaryLabel}
+						<span>{primaryLabel}</span>
+						<SiteIcon name="arrow_outward" size="sm" className="example-site__header-cta-icon" />
 					</a>
 				) : null}
 			</div>

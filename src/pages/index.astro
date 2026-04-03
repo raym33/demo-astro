@@ -1,11 +1,23 @@
 ---
 import ExampleSiteShell from '../components/examples/ExampleSiteShell.astro';
+import SiteIcon from '../components/system/SiteIcon.astro';
+import type { MaterialSymbolName } from '../lib/material-symbols';
 
-const examples = [
+interface ExampleItem {
+	label: string;
+	title: string;
+	href: string;
+	icon: MaterialSymbolName;
+	copy: string;
+	tags: string[];
+}
+
+const examples: ExampleItem[] = [
 	{
 		label: 'Industrial platform',
 		title: 'Northstar Grid',
 		href: '/northstar-grid/',
+		icon: 'monitoring',
 		copy: 'Dark, technical, modular. Built for industrial automation, control rooms, and operations software.',
 		tags: ['B2B', 'Industrial', 'Dark UI'],
 	},
@@ -13,6 +25,7 @@ const examples = [
 		label: 'Editorial studio',
 		title: 'Elm & Ivory',
 		href: '/elm-and-ivory/',
+		icon: 'auto_awesome',
 		copy: 'Warm, quiet, and image-led. Built for interior design, hospitality, and premium studio sites.',
 		tags: ['Editorial', 'Premium', 'Service'],
 	},
@@ -20,6 +33,7 @@ const examples = [
 		label: 'Healthcare service',
 		title: 'HarborCare Clinics',
 		href: '/harborcare-clinics/',
+		icon: 'task_alt',
 		copy: 'Soft, reassuring, and structured. Built for clinics, care providers, and community-facing services.',
 		tags: ['Healthcare', 'Friendly', 'Trust'],
 	},
@@ -27,6 +41,7 @@ const examples = [
 		label: 'Property and development',
 		title: 'Fieldstone Living',
 		href: '/fieldstone-living/',
+		icon: 'layers',
 		copy: 'Precise, sober, and market-ready. Built for property groups, architecture, and residential launches.',
 		tags: ['Real Estate', 'Structured', 'Sales'],
 	},
@@ -34,6 +49,7 @@ const examples = [
 		label: 'Legal advisory',
 		title: 'Briar & Stone Counsel',
 		href: '/briar-and-stone-counsel/',
+		icon: 'flag',
 		copy: 'Monochrome, restrained, and authority-led. Built for law firms, advisory boutiques, and high-trust services.',
 		tags: ['Legal', 'Authority', 'Monochrome'],
 	},
@@ -41,6 +57,7 @@ const examples = [
 		label: 'Education brand',
 		title: 'Brightpath Academy',
 		href: '/brightpath-academy/',
+		icon: 'rocket_launch',
 		copy: 'Sharper, brighter, and more kinetic. Built for private schools, executive education, and modern learning brands.',
 		tags: ['Education', 'Energetic', 'Structured'],
 	},
@@ -48,6 +65,7 @@ const examples = [
 		label: 'Hospitality brand',
 		title: 'Saffron House',
 		href: '/saffron-house-hotel/',
+		icon: 'travel_explore',
 		copy: 'Cinematic, warm, and atmosphere-led. Built for hotels, retreats, and premium guest experiences.',
 		tags: ['Hospitality', 'Warm', 'Cinematic'],
 	},
@@ -55,6 +73,7 @@ const examples = [
 		label: 'Luxury commerce',
 		title: 'Aureline Objects',
 		href: '/aureline-objects/',
+		icon: 'inventory_2',
 		copy: 'High-contrast, object-led, and retail-ready. Built for premium commerce, collections, and designer goods.',
 		tags: ['Commerce', 'Luxury', 'Retail'],
 	},
@@ -82,7 +101,10 @@ const examples = [
 			<p class="examples-home__helper">Open any card below to view a full standalone website demo.</p>
 			<div class="examples-home__quicklinks" aria-label="Example routes">
 				{examples.map((example) => (
-					<a class="examples-home__quicklink" href={example.href}>{example.title}</a>
+					<a class="examples-home__quicklink" href={example.href}>
+						<SiteIcon name={example.icon} size="sm" className="examples-home__quicklink-icon" />
+						<span>{example.title}</span>
+					</a>
 				))}
 			</div>
 		</div>
@@ -90,7 +112,10 @@ const examples = [
 		<div class="examples-home__grid" id="examples">
 			{examples.map((example) => (
 				<a class="examples-home__card" href={example.href}>
-					<p class="examples-home__card-label">{example.label}</p>
+					<p class="examples-home__card-label">
+						<SiteIcon name={example.icon} size="sm" className="examples-home__card-label-icon" />
+						<span>{example.label}</span>
+					</p>
 					<h2 class="examples-home__card-title">{example.title}</h2>
 					<p class="examples-home__card-copy">{example.copy}</p>
 					<div class="examples-home__card-tags">
@@ -98,7 +123,10 @@ const examples = [
 							<span class="examples-home__tag">{tag}</span>
 						))}
 					</div>
-					<span class="examples-home__card-cta">Open demo</span>
+					<span class="examples-home__card-cta">
+						<span>Open demo</span>
+						<SiteIcon name="arrow_outward" size="sm" className="examples-home__card-cta-icon" />
+					</span>
 				</a>
 			))}
 		</div>
