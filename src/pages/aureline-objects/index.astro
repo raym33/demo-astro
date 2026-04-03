@@ -1,0 +1,126 @@
+---
+import ExampleSiteShell from '../../components/examples/ExampleSiteShell.astro';
+import CapsuleHero from '../../components/capsules/CapsuleHero.astro';
+import CapsuleProductTabs from '../../components/capsules/CapsuleProductTabs.astro';
+import CapsuleLogoCloud from '../../components/capsules/CapsuleLogoCloud.astro';
+import CapsuleProofStrip from '../../components/capsules/CapsuleProofStrip.astro';
+import CapsuleJoinCta from '../../components/capsules/CapsuleJoinCta.astro';
+---
+
+<ExampleSiteShell
+	siteName="Aureline Objects"
+	pageTitle="Luxury Commerce Concept"
+	description="Dummy Astro site for a luxury retail and object brand."
+	variant="aureline"
+	tagline="Collectable objects for interiors, gifting, and private sourcing"
+	navItems={[
+		{ label: 'Collections', href: '#collections' },
+		{ label: 'Stockists', href: '#stockists' },
+		{ label: 'Private sales', href: '#contact' },
+	]}
+	primaryLabel="Shop collection"
+	primaryUrl="#contact"
+>
+	<CapsuleHero
+		align="full"
+		eyebrow="Collection 04"
+		title="Objects designed to sit quietly in a room and still alter it completely."
+		intro="<p>Aureline Objects is an imagined retail brand for premium home objects, editions, and collector-led gifting. The site behaves more like a fashion editorial than a generic store grid.</p>"
+		ctaLabel="View collections"
+		ctaUrl="#collections"
+		mediaUrl="/demo-media/aureline-hero.svg"
+		mediaAlt="Abstract luxury object placeholder"
+		theme="paper"
+		layout="split"
+		surface="soft"
+	/>
+
+	<section id="collections">
+		<CapsuleProductTabs
+			align="full"
+			eyebrow="Collections"
+			heading="The site should separate object families the way a gallery separates rooms."
+			intro="<p>Instead of flattening everything into one catalog, each collection gets its own tone, use case, and visual weight.</p>"
+			theme="paper"
+			surface="soft"
+			items={[
+				{
+					label: 'Stone',
+					title: 'Architectural pieces for tables, consoles, and shelving',
+					description: '<p>Weight, grain, and proportion are treated as the main selling language. The object does not need marketing noise.</p>',
+					mediaLabel: 'Stone',
+					mediaUrl: '/demo-media/aureline-object.svg',
+					mediaAlt: 'Abstract stone object placeholder',
+					tone: 'graphite',
+				},
+				{
+					label: 'Metal',
+					title: 'Polished editions that work between sculpture and utility',
+					description: '<p>Designed for clients who buy fewer objects and expect each one to carry more presence.</p>',
+					mediaLabel: 'Metal',
+					mediaUrl: '/demo-media/aureline-hero.svg',
+					mediaAlt: 'Abstract polished object placeholder',
+					tone: 'deep-blue',
+				},
+				{
+					label: 'Private gifting',
+					title: 'Curated object sets for hospitality, executive gifting, and private sourcing',
+					description: '<p>Luxury commerce often turns into relationship management. The site should leave room for that higher-touch route.</p>',
+					mediaLabel: 'Private',
+					mediaUrl: '/demo-media/aureline-object.svg',
+					mediaAlt: 'Abstract gifting placeholder',
+					tone: 'clay',
+				},
+			]}
+		/>
+	</section>
+
+	<section id="stockists">
+		<CapsuleLogoCloud
+			eyebrow="Placed with"
+			heading="Sold through a smaller network of considered partners, not a wide distribution blur."
+			intro="<p>Luxury retail proof often comes through placement and restraint. The stockist list should reinforce that.</p>"
+			layout="editorial"
+			theme="paper"
+			surface="outline"
+			items={[
+				{ name: 'North Gallery', note: 'Private appointments and seasonal edits' },
+				{ name: 'Atelier 17', note: 'Object-led interiors' },
+				{ name: 'The Corner Room', note: 'Collector retail and gifting' },
+				{ name: 'Maison Ledger', note: 'Hospitality sourcing' },
+			]}
+		/>
+	</section>
+
+	<CapsuleProofStrip
+		eyebrow="Commerce model"
+		heading="What makes the brand feel premium is not abundance. It is selection, material confidence, and slower selling."
+		intro="<p>The site uses product logic, but the language stays closer to editorial commerce and private sales than to conventional e-commerce tactics.</p>"
+		layout="split"
+		theme="paper"
+		surface="hard"
+		featuredQuote="<p>The product felt considered before we touched it. The site already filtered out the noise.</p>"
+		featuredName="Collector concept quote"
+		featuredRole="Dummy commerce testimonial"
+		items={[
+			{ value: '4', label: 'core object families', detail: 'A tighter catalog creates more authority than endless assortment.', icon: 'widgets', tone: 'accent' },
+			{ value: 'Small', label: 'edition logic', detail: 'Products are released in smaller runs and slower drops.', icon: 'inventory_2', tone: 'neutral' },
+			{ value: '2 routes', label: 'shop and private sales', detail: 'The site balances direct purchase with higher-touch sourcing.', icon: 'layers', tone: 'neutral' },
+		]}
+	/>
+
+	<section id="contact">
+		<CapsuleJoinCta
+			eyebrow="Purchase path"
+			title="Choose between direct collection purchase and a more private sourcing conversation."
+			body="<p>Premium commerce needs two routes: immediate buying for clear products, and a slower relationship route for collectors, hospitality, and gifting.</p>"
+			primaryLabel="Shop latest release"
+			primaryUrl="#"
+			secondaryLabel="Request private sourcing"
+			secondaryUrl="#"
+			meta={['Editions', 'Stockists', 'Private sales']}
+			theme="paper"
+			surface="soft"
+		/>
+	</section>
+</ExampleSiteShell>

@@ -1,0 +1,420 @@
+---
+import SiteIcon from '../system/SiteIcon.astro';
+
+interface TestimonialStoryItem {
+	initial?: string;
+	name: string;
+	role?: string;
+	statement: string;
+	outcome?: string;
+	ctaLabel?: string;
+	ctaUrl?: string;
+	tone?: 'neutral' | 'accent' | 'ink';
+}
+
+interface Props {
+	align?: 'wide' | 'full';
+	eyebrow?: string;
+	heading?: string;
+	intro?: string;
+	layout?: 'grid' | 'lead-first';
+	theme?: 'paper' | 'ink' | 'signal';
+	surface?: 'soft' | 'hard' | 'outline';
+	items: TestimonialStoryItem[];
+}
+
+const {
+	align = 'wide',
+	eyebrow = '',
+	heading = '',
+	intro = '',
+	layout = 'lead-first',
+	theme = 'paper',
+	surface = 'soft',
+	items = [],
+} = Astro.props;
+---
+
+{items.length ? (
+	<section class:list={['bw-shell', align === 'full' ? 'is-full' : 'is-wide']}>
+		<div
+			class:list={[
+				'bw-testimonial-stories',
+				`is-layout-${layout}`,
+				`is-theme-${theme}`,
+				`is-surface-${surface}`,
+				`has-${items.length}-items`,
+			]}
+		>
+			<div class="bw-testimonial-stories__inner">
+				{eyebrow || heading || intro ? (
+					<div class="bw-testimonial-stories__header">
+						{eyebrow ? (
+							<p class="bw-testimonial-stories__eyebrow">{eyebrow}</p>
+						) : null}
+						{heading ? (
+							<h2 class="bw-testimonial-stories__heading">{heading}</h2>
+						) : null}
+						{intro ? (
+							<div class="bw-testimonial-stories__intro" set:html={intro} />
+						) : null}
+					</div>
+				) : null}
+
+				<div class="bw-testimonial-stories__grid">
+					{items.map((item, index) => (
+						<article
+							class:list={[
+								'bw-testimonial-stories__item',
+								`is-tone-${item.tone || 'neutral'}`,
+								layout === 'lead-first' && index === 0 && 'is-lead',
+							]}
+						>
+							<div class="bw-testimonial-stories__card">
+								<div class="bw-testimonial-stories__meta">
+									<div class="bw-testimonial-stories__identity">
+										<span class="bw-testimonial-stories__initial">
+											{item.initial || item.name.slice(0, 1)}
+										</span>
+										<div class="bw-testimonial-stories__identity-copy">
+											<p class="bw-testimonial-stories__name">{item.name}</p>
+											{item.role ? (
+												<p class="bw-testimonial-stories__role">{item.role}</p>
+											) : null}
+										</div>
+									</div>
+
+									<span class="bw-testimonial-stories__index">
+										{String(index + 1).padStart(2, '0')}
+									</span>
+								</div>
+
+								<blockquote
+									class="bw-testimonial-stories__statement"
+									set:html={item.statement}
+								/>
+
+								{item.outcome ? (
+									<div class="bw-testimonial-stories__outcome">
+										<p class="bw-testimonial-stories__outcome-label">Outcome</p>
+										<div
+											class="bw-testimonial-stories__outcome-body"
+											set:html={item.outcome}
+										/>
+									</div>
+								) : null}
+
+								{item.ctaLabel ? (
+									item.ctaUrl ? (
+										<a class="bw-testimonial-stories__cta" href={item.ctaUrl}>
+											<span>{item.ctaLabel}</span>
+											<SiteIcon
+												name="arrow_outward"
+												size="sm"
+												className="bw-testimonial-stories__cta-icon"
+											/>
+										</a>
+									) : (
+										<span class="bw-testimonial-stories__cta">
+											<span>{item.ctaLabel}</span>
+										</span>
+									)
+								) : null}
+							</div>
+						</article>
+					))}
+				</div>
+			</div>
+		</div>
+	</section>
+) : null}
+
+<style>
+	.bw-testimonial-stories {
+		--story-bg: #f4efe7;
+		--story-card: rgba(255, 255, 255, 0.72);
+		--story-ink: #3b322d;
+		--story-muted: rgba(59, 50, 45, 0.72);
+		--story-line: rgba(59, 50, 45, 0.12);
+		--story-accent: #b2663c;
+		--story-shadow: 0 18px 44px rgba(59, 50, 45, 0.08);
+		position: relative;
+		overflow: clip;
+		border-radius: clamp(1rem, 2.5vw, 1.75rem);
+		background: var(--story-bg);
+		color: var(--story-ink);
+	}
+
+	.bw-testimonial-stories.is-theme-ink {
+		--story-bg: #151313;
+		--story-card: rgba(248, 240, 236, 0.07);
+		--story-ink: #f7efe8;
+		--story-muted: rgba(247, 239, 232, 0.72);
+		--story-line: rgba(247, 239, 232, 0.12);
+		--story-accent: #efb989;
+		--story-shadow: 0 22px 48px rgba(0, 0, 0, 0.24);
+	}
+
+	.bw-testimonial-stories.is-theme-signal {
+		--story-bg: #f4ddcc;
+		--story-card: rgba(255, 248, 242, 0.76);
+		--story-ink: #36231b;
+		--story-muted: rgba(54, 35, 27, 0.74);
+		--story-line: rgba(54, 35, 27, 0.12);
+		--story-accent: #c24e27;
+		--story-shadow: 0 20px 46px rgba(103, 56, 35, 0.12);
+	}
+
+	.bw-testimonial-stories.is-surface-hard {
+		--story-card: rgba(255, 255, 255, 0.9);
+	}
+
+	.bw-testimonial-stories.is-theme-ink.is-surface-hard {
+		--story-card: rgba(248, 240, 236, 0.11);
+	}
+
+	.bw-testimonial-stories.is-theme-signal.is-surface-hard {
+		--story-card: rgba(255, 247, 239, 0.92);
+	}
+
+	.bw-testimonial-stories.is-surface-outline {
+		background: transparent;
+		border: 1px solid var(--story-line);
+	}
+
+	.bw-testimonial-stories__inner {
+		display: grid;
+		gap: clamp(1.2rem, 3vw, 2.2rem);
+		padding: clamp(1.3rem, 4vw, 3rem);
+	}
+
+	.bw-testimonial-stories__header {
+		display: grid;
+		gap: 1rem;
+		align-content: start;
+		min-width: 0;
+	}
+
+	.bw-testimonial-stories__eyebrow {
+		margin: 0;
+		font-size: 0.8rem;
+		font-weight: 700;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--story-accent);
+	}
+
+	.bw-testimonial-stories__heading {
+		margin: 0;
+		max-width: 17ch;
+		font-family: var(--bw-font-display);
+		font-size: clamp(2rem, 4.7vw, 3.05rem);
+		line-height: 1.05;
+		letter-spacing: -0.04em;
+		text-wrap: balance;
+	}
+
+	.bw-testimonial-stories__intro {
+		max-width: 48rem;
+		font-size: clamp(1rem, 2vw, 1.05rem);
+		line-height: 1.72;
+		color: var(--story-muted);
+	}
+
+	.bw-testimonial-stories__intro :first-child,
+	.bw-testimonial-stories__statement :first-child,
+	.bw-testimonial-stories__outcome-body :first-child {
+		margin-top: 0;
+	}
+
+	.bw-testimonial-stories__intro :last-child,
+	.bw-testimonial-stories__statement :last-child,
+	.bw-testimonial-stories__outcome-body :last-child {
+		margin-bottom: 0;
+	}
+
+	.bw-testimonial-stories__grid {
+		display: grid;
+		gap: 1rem;
+	}
+
+	.bw-testimonial-stories__item {
+		--story-item-bg: var(--story-card);
+		--story-item-line: var(--story-line);
+		--story-item-muted: var(--story-muted);
+		display: grid;
+		border: 1px solid var(--story-item-line);
+		border-radius: 1.15rem;
+		background: var(--story-item-bg);
+		box-shadow: var(--story-shadow);
+	}
+
+	.bw-testimonial-stories__item.is-tone-accent {
+		--story-item-bg: linear-gradient(160deg, #f3d8c5 0%, #faede4 100%);
+		--story-item-line: transparent;
+		--story-item-muted: rgba(54, 35, 27, 0.78);
+	}
+
+	.bw-testimonial-stories.is-theme-ink .bw-testimonial-stories__item.is-tone-accent {
+		--story-item-bg: linear-gradient(160deg, #513e36 0%, #261f1d 100%);
+		--story-item-muted: rgba(247, 239, 232, 0.76);
+	}
+
+	.bw-testimonial-stories__item.is-tone-ink {
+		--story-item-bg: #1d1716;
+		--story-item-line: rgba(248, 239, 232, 0.12);
+		--story-item-muted: rgba(248, 239, 232, 0.74);
+	}
+
+	.bw-testimonial-stories.is-theme-ink .bw-testimonial-stories__item.is-tone-ink {
+		--story-item-bg: rgba(248, 240, 236, 0.12);
+	}
+
+	.bw-testimonial-stories.is-surface-outline .bw-testimonial-stories__item {
+		box-shadow: none;
+	}
+
+	.bw-testimonial-stories__card {
+		display: grid;
+		gap: 1.1rem;
+		height: 100%;
+		padding: clamp(1rem, 2.8vw, 1.45rem);
+	}
+
+	.bw-testimonial-stories__meta {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: 1rem;
+	}
+
+	.bw-testimonial-stories__identity {
+		display: flex;
+		align-items: center;
+		gap: 0.8rem;
+		min-width: 0;
+	}
+
+	.bw-testimonial-stories__initial {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 2.7rem;
+		height: 2.7rem;
+		border-radius: 999px;
+		background: rgba(255, 255, 255, 0.5);
+		font-family: var(--bw-font-display);
+		font-size: 1.25rem;
+		line-height: 1;
+		letter-spacing: -0.04em;
+	}
+
+	.bw-testimonial-stories.is-theme-ink .bw-testimonial-stories__initial {
+		background: rgba(255, 255, 255, 0.08);
+	}
+
+	.bw-testimonial-stories__identity-copy {
+		display: grid;
+		gap: 0.12rem;
+		min-width: 0;
+	}
+
+	.bw-testimonial-stories__name,
+	.bw-testimonial-stories__role,
+	.bw-testimonial-stories__index {
+		margin: 0;
+	}
+
+	.bw-testimonial-stories__name {
+		font-size: 0.95rem;
+		font-weight: 700;
+		line-height: 1.2;
+	}
+
+	.bw-testimonial-stories__role {
+		font-size: 0.85rem;
+		line-height: 1.45;
+		color: var(--story-item-muted);
+	}
+
+	.bw-testimonial-stories__index {
+		font-size: 0.74rem;
+		font-weight: 700;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--story-accent);
+	}
+
+	.bw-testimonial-stories__statement {
+		margin: 0;
+		font-family: var(--bw-font-display);
+		font-size: clamp(1.18rem, 2.5vw, 1.65rem);
+		line-height: 1.16;
+		letter-spacing: -0.03em;
+		text-wrap: balance;
+	}
+
+	.bw-testimonial-stories__outcome {
+		display: grid;
+		gap: 0.45rem;
+		padding-top: 0.9rem;
+		border-top: 1px solid var(--story-item-line);
+	}
+
+	.bw-testimonial-stories__outcome-label {
+		margin: 0;
+		font-size: 0.74rem;
+		font-weight: 700;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--story-accent);
+	}
+
+	.bw-testimonial-stories__outcome-body {
+		font-size: 0.96rem;
+		line-height: 1.65;
+		color: var(--story-item-muted);
+	}
+
+	.bw-testimonial-stories__cta {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.45rem;
+		margin-top: auto;
+		color: inherit;
+		font-size: 0.78rem;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		text-decoration: none;
+	}
+
+	.bw-testimonial-stories__cta-icon {
+		transition: transform 180ms ease;
+	}
+
+	.bw-testimonial-stories__cta:hover .bw-testimonial-stories__cta-icon {
+		transform: translateX(2px) translateY(-1px);
+	}
+
+	@media (min-width: 760px) {
+		.bw-testimonial-stories__grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (min-width: 1100px) {
+		.bw-testimonial-stories__grid {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+
+		.bw-testimonial-stories.is-layout-lead-first .bw-testimonial-stories__item.is-lead {
+			grid-column: span 2;
+		}
+
+		.bw-testimonial-stories.is-layout-lead-first .bw-testimonial-stories__item.is-lead .bw-testimonial-stories__statement {
+			max-width: 28ch;
+			font-size: clamp(1.35rem, 2.4vw, 1.95rem);
+		}
+	}
+</style>

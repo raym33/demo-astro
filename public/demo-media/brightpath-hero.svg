@@ -1,0 +1,18 @@
+<svg width="1600" height="1040" viewBox="0 0 1600 1040" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="120" y1="60" x2="1380" y2="920" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F7F6F0"/>
+      <stop offset="1" stop-color="#EDEBE3"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1040" fill="url(#bg)"/>
+  <circle cx="1298" cy="218" r="118" fill="#FFD44C"/>
+  <circle cx="128" cy="876" r="182" fill="#2E63FF" fill-opacity="0.12"/>
+  <rect x="154" y="124" width="1292" height="792" rx="52" fill="#FFFFFF" stroke="#D8D8D8"/>
+  <rect x="262" y="226" width="1080" height="176" rx="34" fill="#285FFF"/>
+  <rect x="262" y="448" width="492" height="330" rx="34" fill="#FFF4D2"/>
+  <rect x="798" y="448" width="544" height="330" rx="34" fill="#EAF0FF"/>
+  <circle cx="1000" cy="610" r="82" fill="#FFC83D"/>
+  <rect x="914" y="726" width="242" height="20" rx="10" fill="#557FFF"/>
+  <text x="156" y="102" fill="#285FFF" font-family="Arial, sans-serif" font-size="24" letter-spacing="5">ACADEMY / PLACEHOLDER VISUAL</text>
+</svg>

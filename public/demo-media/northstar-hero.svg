@@ -1,0 +1,31 @@
+<svg width="1600" height="1040" viewBox="0 0 1600 1040" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="120" y1="40" x2="1400" y2="920" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0D1C31"/>
+      <stop offset="1" stop-color="#07101E"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="260" y1="160" x2="1110" y2="850" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#16365C"/>
+      <stop offset="1" stop-color="#0A1730"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1040" fill="url(#bg)"/>
+  <g opacity="0.22">
+    <path d="M0 918L1600 424" stroke="#68A2FF" stroke-width="2"/>
+    <path d="M0 774L1600 280" stroke="#68A2FF" stroke-width="2"/>
+    <path d="M0 630L1600 136" stroke="#68A2FF" stroke-width="2"/>
+  </g>
+  <rect x="184" y="140" width="1240" height="760" rx="44" fill="url(#panel)" stroke="#3F78C8" stroke-opacity="0.45"/>
+  <rect x="260" y="222" width="540" height="356" rx="30" fill="#0E223D"/>
+  <rect x="834" y="222" width="332" height="356" rx="30" fill="#132B4B"/>
+  <rect x="1196" y="222" width="152" height="356" rx="30" fill="#102542"/>
+  <rect x="260" y="612" width="1088" height="78" rx="18" fill="#0C1A2E"/>
+  <rect x="260" y="720" width="1088" height="78" rx="18" fill="#0C1A2E"/>
+  <circle cx="1230" cy="748" r="58" fill="#5C94FF"/>
+  <circle cx="1230" cy="748" r="18" fill="#E7F0FF"/>
+  <path d="M370 548L472 410L574 464L684 326" stroke="#71AEFF" stroke-width="10" stroke-linecap="round"/>
+  <path d="M930 328H1074" stroke="#8EBBFF" stroke-width="18" stroke-linecap="round"/>
+  <path d="M930 392H1044" stroke="#8EBBFF" stroke-opacity="0.76" stroke-width="18" stroke-linecap="round"/>
+  <path d="M930 456H1004" stroke="#8EBBFF" stroke-opacity="0.56" stroke-width="18" stroke-linecap="round"/>
+  <text x="262" y="126" fill="#8EBBFF" fill-opacity="0.92" font-family="Arial, sans-serif" font-size="24" letter-spacing="5">CONTROL ROOM / DUMMY VISUAL</text>
+</svg>

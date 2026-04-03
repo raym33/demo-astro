@@ -1,0 +1,136 @@
+---
+import ExampleSiteShell from '../../components/examples/ExampleSiteShell.astro';
+import CapsuleHero from '../../components/capsules/CapsuleHero.astro';
+import CapsuleFeaturePair from '../../components/capsules/CapsuleFeaturePair.astro';
+import CapsuleEditorialQuote from '../../components/capsules/CapsuleEditorialQuote.astro';
+import CapsuleProofStrip from '../../components/capsules/CapsuleProofStrip.astro';
+import CapsuleResourceCards from '../../components/capsules/CapsuleResourceCards.astro';
+import CapsuleJoinCta from '../../components/capsules/CapsuleJoinCta.astro';
+---
+
+<ExampleSiteShell
+	siteName="Saffron House"
+	pageTitle="Boutique Hotel"
+	description="Dummy Astro site for a boutique hospitality brand."
+	variant="saffron-house"
+	tagline="A boutique stay shaped around slow mornings and warm evenings"
+	navItems={[
+		{ label: 'Stay', href: '#stay' },
+		{ label: 'Spaces', href: '#spaces' },
+		{ label: 'Book', href: '#contact' },
+	]}
+	primaryLabel="Reserve a stay"
+	primaryUrl="#contact"
+>
+	<CapsuleHero
+		align="full"
+		eyebrow="Boutique stay"
+		title="Warm light, slower mornings, and a guest experience built around atmosphere."
+		intro="<p>Saffron House is an imagined hotel brand designed to feel cinematic, tactile, and private from the first screen. The site sells mood before it sells room types.</p>"
+		ctaLabel="Explore the stay"
+		ctaUrl="#stay"
+		mediaUrl="/demo-media/saffron-hero.svg"
+		mediaAlt="Abstract hospitality scene placeholder"
+		theme="ink"
+		layout="stacked"
+		surface="soft"
+	/>
+
+	<section id="stay">
+		<CapsuleFeaturePair
+			eyebrow="The stay"
+			title="The property is designed less like a hotel and more like a private house with exceptional service."
+			body="<p>Guests arrive for calm, texture, food, and a slower pace. The site reflects that by using fewer choices, stronger imagery, and a more atmospheric narrative rhythm.</p>"
+			ctaLabel="See the spaces"
+			ctaUrl="#spaces"
+			mediaUrl="/demo-media/saffron-suite.svg"
+			mediaAlt="Abstract suite placeholder"
+			layout="media-end"
+			tone="ink"
+			surface="soft"
+		/>
+	</section>
+
+	<section id="spaces">
+		<CapsuleResourceCards
+			eyebrow="Guest spaces"
+			heading="Each guest-facing space is sold as part of one mood, not as a disconnected feature list."
+			intro="<p>That means the copy stays restrained, the photography carries more weight, and the booking route appears only after the atmosphere is established.</p>"
+			layout="grid"
+			theme="ink"
+			surface="soft"
+			items={[
+				{
+					eyebrow: 'Space 01',
+					title: 'Garden suites',
+					description: '<p>Private terraces, soft light, and quieter rooms for longer stays and slower mornings.</p>',
+					meta: 'For extended stays',
+					ctaLabel: 'View details',
+					ctaUrl: '#contact',
+					tone: 'accent',
+				},
+				{
+					eyebrow: 'Space 02',
+					title: 'The dining room',
+					description: '<p>An evening space built around firelight, local menus, and a calmer social rhythm.</p>',
+					meta: 'Dinner and breakfast',
+					ctaLabel: 'View details',
+					ctaUrl: '#contact',
+					tone: 'neutral',
+				},
+				{
+					eyebrow: 'Space 03',
+					title: 'Pool court',
+					description: '<p>A small exterior sequence designed for reading, conversation, and retreat weekends.</p>',
+					meta: 'Outdoor lounge',
+					ctaLabel: 'View details',
+					ctaUrl: '#contact',
+					tone: 'ink',
+				},
+			]}
+		/>
+	</section>
+
+	<CapsuleEditorialQuote
+		quote="<p>Luxury in hospitality is often the feeling that time is finally moving at the right speed.</p>"
+		name="Maison concept note"
+		role="Dummy editorial quote"
+		mediaUrl="/demo-media/saffron-hero.svg"
+		mediaAlt="Abstract hospitality editorial placeholder"
+		layout="portrait-start"
+		tone="ink"
+		surface="soft"
+	/>
+
+	<CapsuleProofStrip
+		eyebrow="Guest signals"
+		heading="The brand earns desire through atmosphere, rhythm, and the promise of a slower stay."
+		intro="<p>Hospitality sites need a different order of proof: not process first, but feeling first, then clarity around rooms and booking.</p>"
+		layout="split"
+		theme="ink"
+		surface="hard"
+		featuredQuote="<p>We booked because the site felt like the property would actually feel. That almost never happens.</p>"
+		featuredName="Guest concept quote"
+		featuredRole="Weekend booking story"
+		items={[
+			{ value: '18', label: 'rooms only', detail: 'The property stays intentionally intimate and low-density.', icon: 'inventory_2', tone: 'accent' },
+			{ value: '2', label: 'signature dining windows', detail: 'The food offering is limited on purpose and treated as part of the stay.', icon: 'schedule', tone: 'neutral' },
+			{ value: '1 mood', label: 'shared property language', detail: 'Rooms, dining, and common spaces all belong to one clear atmosphere.', icon: 'task_alt', tone: 'neutral' },
+		]}
+	/>
+
+	<section id="contact">
+		<CapsuleJoinCta
+			eyebrow="Reservations"
+			title="Book the stay if what you want is warmth, privacy, and a slower rhythm for a few days."
+			body="<p>The booking route stays simple: choose your stay window, note any preferences, and let the property shape the rest of the guest flow.</p>"
+			primaryLabel="Reserve a room"
+			primaryUrl="#"
+			secondaryLabel="Plan a private stay"
+			secondaryUrl="#"
+			meta={['Suites', 'Dining', 'Private stays']}
+			theme="ink"
+			surface="soft"
+		/>
+	</section>
+</ExampleSiteShell>

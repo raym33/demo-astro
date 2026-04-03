@@ -1,0 +1,99 @@
+---
+import ExampleSiteShell from '../components/examples/ExampleSiteShell.astro';
+
+const examples = [
+	{
+		label: 'Industrial platform',
+		title: 'Northstar Grid',
+		href: '/northstar-grid/',
+		copy: 'Dark, technical, modular. Built for industrial automation, control rooms, and operations software.',
+		tags: ['B2B', 'Industrial', 'Dark UI'],
+	},
+	{
+		label: 'Editorial studio',
+		title: 'Elm & Ivory',
+		href: '/elm-and-ivory/',
+		copy: 'Warm, quiet, and image-led. Built for interior design, hospitality, and premium studio sites.',
+		tags: ['Editorial', 'Premium', 'Service'],
+	},
+	{
+		label: 'Healthcare service',
+		title: 'HarborCare Clinics',
+		href: '/harborcare-clinics/',
+		copy: 'Soft, reassuring, and structured. Built for clinics, care providers, and community-facing services.',
+		tags: ['Healthcare', 'Friendly', 'Trust'],
+	},
+	{
+		label: 'Property and development',
+		title: 'Fieldstone Living',
+		href: '/fieldstone-living/',
+		copy: 'Precise, sober, and market-ready. Built for property groups, architecture, and residential launches.',
+		tags: ['Real Estate', 'Structured', 'Sales'],
+	},
+	{
+		label: 'Legal advisory',
+		title: 'Briar & Stone Counsel',
+		href: '/briar-and-stone-counsel/',
+		copy: 'Monochrome, restrained, and authority-led. Built for law firms, advisory boutiques, and high-trust services.',
+		tags: ['Legal', 'Authority', 'Monochrome'],
+	},
+	{
+		label: 'Education brand',
+		title: 'Brightpath Academy',
+		href: '/brightpath-academy/',
+		copy: 'Sharper, brighter, and more kinetic. Built for private schools, executive education, and modern learning brands.',
+		tags: ['Education', 'Energetic', 'Structured'],
+	},
+	{
+		label: 'Hospitality brand',
+		title: 'Saffron House',
+		href: '/saffron-house-hotel/',
+		copy: 'Cinematic, warm, and atmosphere-led. Built for hotels, retreats, and premium guest experiences.',
+		tags: ['Hospitality', 'Warm', 'Cinematic'],
+	},
+	{
+		label: 'Luxury commerce',
+		title: 'Aureline Objects',
+		href: '/aureline-objects/',
+		copy: 'High-contrast, object-led, and retail-ready. Built for premium commerce, collections, and designer goods.',
+		tags: ['Commerce', 'Luxury', 'Retail'],
+	},
+];
+---
+
+<ExampleSiteShell
+	siteName="Astro Examples"
+	pageTitle="Preview Gallery"
+	description="Gallery of premium Astro site examples built from the capsule system."
+	variant="gallery"
+	primaryLabel="Open first example"
+	primaryUrl={examples[0].href}
+	footerNote="Public example routes for the Astro demo repository."
+>
+	<section class="examples-home">
+		<div class="examples-home__hero">
+			<p class="examples-home__eyebrow">Preview set</p>
+			<h1 class="examples-home__title">Eight invented businesses, eight visibly different Astro directions.</h1>
+			<p class="examples-home__intro">
+				These routes exist to generate screenshots for the repository. They reuse the same Astro capsule
+				system, but each one pushes layout, tone, spacing, navigation, and market language in a
+				different direction.
+			</p>
+		</div>
+
+		<div class="examples-home__grid">
+			{examples.map((example) => (
+				<a class="examples-home__card" href={example.href}>
+					<p class="examples-home__card-label">{example.label}</p>
+					<h2 class="examples-home__card-title">{example.title}</h2>
+					<p class="examples-home__card-copy">{example.copy}</p>
+					<div class="examples-home__card-tags">
+						{example.tags.map((tag) => (
+							<span class="examples-home__tag">{tag}</span>
+						))}
+					</div>
+				</a>
+			))}
+		</div>
+	</section>
+</ExampleSiteShell>

@@ -1,0 +1,166 @@
+---
+import ExampleSiteShell from '../../components/examples/ExampleSiteShell.astro';
+import CapsuleHero from '../../components/capsules/CapsuleHero.astro';
+import CapsuleLogoCloud from '../../components/capsules/CapsuleLogoCloud.astro';
+import CapsuleProductTabs from '../../components/capsules/CapsuleProductTabs.astro';
+import CapsuleStickySteps from '../../components/capsules/CapsuleStickySteps.astro';
+import CapsuleProofStrip from '../../components/capsules/CapsuleProofStrip.astro';
+import CapsuleJoinCta from '../../components/capsules/CapsuleJoinCta.astro';
+---
+
+<ExampleSiteShell
+	siteName="Northstar Grid"
+	pageTitle="Industrial Operations Platform"
+	description="Dummy Astro site for an industrial operations platform."
+	variant="northstar"
+	tagline="Industrial operations orchestration"
+	navItems={[
+		{ label: 'Platform', href: '#platform' },
+		{ label: 'Rollout', href: '#rollout' },
+		{ label: 'Proof', href: '#proof' },
+	]}
+	primaryLabel="Book a demo"
+	primaryUrl="#contact"
+>
+	<CapsuleHero
+		align="full"
+		eyebrow="Northstar OS"
+		title="One operating layer for complex sites, critical assets, and fast decisions."
+		intro="<p>Northstar Grid helps operators unify alarms, work orders, field telemetry, and asset context inside a single operating surface. Built for teams that cannot afford fragmented visibility.</p>"
+		ctaLabel="See the platform"
+		ctaUrl="#platform"
+		mediaUrl="/demo-media/northstar-hero.svg"
+		mediaAlt="Abstract control room dashboard placeholder"
+		theme="ink"
+		layout="split"
+		surface="hard"
+	/>
+
+	<section id="platform">
+		<CapsuleLogoCloud
+			eyebrow="Used across heavy operations"
+			heading="Designed for teams that run physical systems, not slide decks."
+			intro="<p>Each deployment starts from the same product core but maps to a different operational environment: utilities, logistics nodes, manufacturing cells, remote assets, and service contractors.</p>"
+			layout="wall"
+			theme="ink"
+			surface="outline"
+			items={[
+				{ name: 'Utilities', note: 'Control, dispatch, outage response' },
+				{ name: 'Ports', note: 'Yard flow, work order routing' },
+				{ name: 'Factories', note: 'Diagnostics, throughput, downtime' },
+				{ name: 'Mining', note: 'Remote assets, field teams' },
+				{ name: 'Rail', note: 'Incident response, maintenance' },
+				{ name: 'EPC', note: 'Commissioning, subcontractor views' },
+			]}
+		/>
+	</section>
+
+	<CapsuleProductTabs
+		align="full"
+		eyebrow="Platform modules"
+		heading="A product surface that adapts to operations, maintenance, and oversight."
+		intro="<p>The same stack can serve the duty manager, field lead, maintenance planner, or executive room without creating four disconnected tools.</p>"
+		theme="ink"
+		surface="soft"
+		items={[
+			{
+				label: 'Ops desk',
+				title: 'Shift coordination with live asset context',
+				description: '<p>Command views combine active incidents, asset health, task load, and escalation state so the shift leader can act from one place.</p>',
+				mediaLabel: 'Ops desk',
+				mediaUrl: '/demo-media/northstar-lab.svg',
+				mediaAlt: 'Abstract operations panel placeholder',
+				tone: 'deep-blue',
+			},
+			{
+				label: 'Field sync',
+				title: 'The field team sees the same truth as the control room',
+				description: '<p>Technicians receive routes, parts, procedures, and asset history without waiting for PDFs or threaded messages.</p>',
+				mediaLabel: 'Field sync',
+				mediaUrl: '/demo-media/northstar-network.svg',
+				mediaAlt: 'Abstract network map placeholder',
+				tone: 'graphite',
+			},
+			{
+				label: 'Executive view',
+				title: 'Escalation, throughput, and recovery in one board',
+				description: '<p>Leadership gets a calmer layer focused on risk, recovery time, site performance, and pending work concentration.</p>',
+				mediaLabel: 'Executive view',
+				mediaUrl: '/demo-media/northstar-hero.svg',
+				mediaAlt: 'Abstract control room placeholder',
+				tone: 'blue',
+			},
+		]}
+	/>
+
+	<section id="rollout">
+		<CapsuleStickySteps
+			eyebrow="Rollout path"
+			heading="Deploy in controlled steps without breaking the plant."
+			intro="<p>The product is introduced in layers so operations keep moving while teams adopt the new workflow.</p>"
+			layout="progressive"
+			theme="ink"
+			surface="hard"
+			items={[
+				{
+					label: 'Week 01',
+					title: 'Map systems, alarms, and ownership lines',
+					description: '<p>We audit signals, dispatch chains, maintenance inputs, and the screens people already trust.</p>',
+					detail: 'Goal: reduce noise before adding more data.',
+					mediaUrl: '/demo-media/northstar-network.svg',
+					mediaAlt: 'Abstract rollout map',
+				},
+				{
+					label: 'Week 02',
+					title: 'Stand up the operating model with one pilot crew',
+					description: '<p>A single site or team goes live first, so we validate incident patterns, shift rituals, and field response.</p>',
+					detail: 'Goal: prove speed and clarity in a live environment.',
+					mediaUrl: '/demo-media/northstar-lab.svg',
+					mediaAlt: 'Abstract diagnostic cell',
+				},
+				{
+					label: 'Week 03',
+					title: 'Expand by role, not by chaos',
+					description: '<p>Once the pilot stabilizes, views are widened for supervisors, planners, and regional leads with the right permission model.</p>',
+					detail: 'Goal: scale trust without duplicating tools.',
+					mediaUrl: '/demo-media/northstar-hero.svg',
+					mediaAlt: 'Abstract control room',
+				},
+			]}
+		/>
+	</section>
+
+	<section id="proof">
+		<CapsuleProofStrip
+			eyebrow="Commercial proof"
+			heading="Operators buy Northstar when reliability starts costing real money."
+			intro="<p>The product is usually brought in after incident fatigue, dashboard sprawl, or delayed field recovery starts slowing decisions down.</p>"
+			layout="split"
+			theme="ink"
+			surface="hard"
+			featuredQuote="<p>We did not need another analytics toy. We needed a single operating layer that could survive shift handovers and still move the field.</p>"
+			featuredName="Dana Mercer"
+			featuredRole="Operations transformation lead"
+			items={[
+				{ value: '18%', label: 'faster issue triage', detail: 'Pilot benchmark after the first live quarter.', icon: 'analytics', tone: 'accent' },
+				{ value: '1', label: 'shared source of truth', detail: 'Control, field, and planning views sit on one operating model.', icon: 'layers', tone: 'neutral' },
+				{ value: '4 weeks', label: 'first production pilot', detail: 'Fast enough for teams that need proof without a long platform program.', icon: 'schedule', tone: 'neutral' },
+			]}
+		/>
+	</section>
+
+	<section id="contact">
+		<CapsuleJoinCta
+			eyebrow="Next step"
+			title="If the operation is too complex for generic dashboards, start with one live pilot."
+			body="<p>Northstar is sold with an implementation path, not just a login. The first scope is usually one site, one crew, and one visible operational bottleneck.</p>"
+			primaryLabel="Book an operations demo"
+			primaryUrl="#"
+			secondaryLabel="Request architecture note"
+			secondaryUrl="#"
+			meta={['Industrial environments', 'Fast discovery sprint', 'Role-based rollout']}
+			theme="ink"
+			surface="soft"
+		/>
+	</section>
+</ExampleSiteShell>

@@ -1,0 +1,305 @@
+---
+interface LogoCloudItem {
+	name: string;
+	note?: string;
+	url?: string;
+	imageUrl?: string;
+	imageAlt?: string;
+}
+
+interface Props {
+	align?: 'wide' | 'full';
+	eyebrow?: string;
+	heading?: string;
+	intro?: string;
+	layout?: 'wall' | 'editorial';
+	theme?: 'paper' | 'ink' | 'signal';
+	surface?: 'soft' | 'hard' | 'outline';
+	items: LogoCloudItem[];
+}
+
+const {
+	align = 'wide',
+	eyebrow = '',
+	heading = '',
+	intro = '',
+	layout = 'wall',
+	theme = 'paper',
+	surface = 'soft',
+	items = [],
+} = Astro.props;
+---
+
+{items.length ? (
+	<section class:list={['bw-shell', align === 'full' ? 'is-full' : 'is-wide']}>
+		<div
+			class:list={[
+				'bw-logo-cloud',
+				`is-layout-${layout}`,
+				`is-theme-${theme}`,
+				`is-surface-${surface}`,
+				`has-${items.length}-items`,
+			]}
+		>
+			<div class="bw-logo-cloud__inner">
+				{eyebrow || heading || intro ? (
+					<div class="bw-logo-cloud__header">
+						{eyebrow ? <p class="bw-logo-cloud__eyebrow">{eyebrow}</p> : null}
+						{heading ? <h2 class="bw-logo-cloud__heading">{heading}</h2> : null}
+						{intro ? <div class="bw-logo-cloud__intro" set:html={intro} /> : null}
+					</div>
+				) : null}
+
+				<div class="bw-logo-cloud__grid">
+					{items.map((item) => {
+						const Tag = item.url ? 'a' : 'div';
+
+						return (
+							<article
+								class:list={[
+									'bw-logo-cloud__item',
+									item.imageUrl ? 'has-image' : 'has-text',
+								]}
+							>
+								<Tag
+									class="bw-logo-cloud__item-link"
+									href={item.url || undefined}
+								>
+									<div class="bw-logo-cloud__media">
+										{item.imageUrl ? (
+											<img
+												class="bw-logo-cloud__image"
+												src={item.imageUrl}
+												alt={item.imageAlt || item.name}
+											/>
+										) : item.name ? (
+											<div class="bw-logo-cloud__fallback">{item.name}</div>
+										) : null}
+									</div>
+
+									{item.name || item.note ? (
+										<div class="bw-logo-cloud__item-copy">
+											{item.name ? (
+												<h3 class="bw-logo-cloud__name">{item.name}</h3>
+											) : null}
+											{layout === 'editorial' && item.note ? (
+												<div class="bw-logo-cloud__note" set:html={item.note} />
+											) : null}
+										</div>
+									) : null}
+								</Tag>
+							</article>
+						);
+					})}
+				</div>
+			</div>
+		</div>
+	</section>
+) : null}
+
+<style>
+	.bw-logo-cloud {
+		--logo-bg: #f4efe7;
+		--logo-card: rgba(255, 255, 255, 0.7);
+		--logo-ink: #433b36;
+		--logo-muted: rgba(67, 59, 54, 0.74);
+		--logo-line: rgba(67, 59, 54, 0.12);
+		--logo-accent: #9d6e51;
+		--logo-shadow: 0 18px 42px rgba(67, 59, 54, 0.08);
+		position: relative;
+		overflow: clip;
+		border-radius: clamp(1rem, 2.5vw, 1.75rem);
+		background: var(--logo-bg);
+		color: var(--logo-ink);
+	}
+
+	.bw-logo-cloud.is-theme-ink {
+		--logo-bg: #171414;
+		--logo-card: rgba(255, 248, 242, 0.06);
+		--logo-ink: #f6efe9;
+		--logo-muted: rgba(246, 239, 233, 0.7);
+		--logo-line: rgba(246, 239, 233, 0.12);
+		--logo-accent: #efb989;
+		--logo-shadow: 0 22px 48px rgba(0, 0, 0, 0.24);
+	}
+
+	.bw-logo-cloud.is-theme-signal {
+		--logo-bg: #f3dcc7;
+		--logo-card: rgba(255, 250, 246, 0.74);
+		--logo-ink: #34241d;
+		--logo-muted: rgba(52, 36, 29, 0.74);
+		--logo-line: rgba(52, 36, 29, 0.12);
+		--logo-accent: #bf542f;
+		--logo-shadow: 0 20px 46px rgba(96, 55, 39, 0.12);
+	}
+
+	.bw-logo-cloud.is-surface-hard {
+		--logo-card: rgba(255, 255, 255, 0.88);
+	}
+
+	.bw-logo-cloud.is-theme-ink.is-surface-hard {
+		--logo-card: rgba(255, 248, 242, 0.1);
+	}
+
+	.bw-logo-cloud.is-theme-signal.is-surface-hard {
+		--logo-card: rgba(255, 245, 236, 0.9);
+	}
+
+	.bw-logo-cloud.is-surface-outline {
+		background: transparent;
+		border: 1px solid var(--logo-line);
+	}
+
+	.bw-logo-cloud__inner {
+		display: grid;
+		gap: clamp(1.25rem, 3vw, 2.25rem);
+		padding: clamp(1.3rem, 4vw, 3rem);
+	}
+
+	.bw-logo-cloud__header {
+		display: grid;
+		gap: 1rem;
+		align-content: start;
+		min-width: 0;
+	}
+
+	.bw-logo-cloud__eyebrow {
+		margin: 0;
+		font-size: 0.8rem;
+		font-weight: 700;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--logo-accent);
+	}
+
+	.bw-logo-cloud__heading {
+		margin: 0;
+		max-width: 18ch;
+		font-family: var(--bw-font-display);
+		font-size: clamp(2rem, 4.6vw, 3.1rem);
+		line-height: 1.06;
+		letter-spacing: -0.04em;
+		text-wrap: balance;
+	}
+
+	.bw-logo-cloud__intro {
+		max-width: 48rem;
+		font-size: clamp(1rem, 2vw, 1.06rem);
+		line-height: 1.72;
+		color: var(--logo-muted);
+	}
+
+	.bw-logo-cloud__intro :first-child {
+		margin-top: 0;
+	}
+
+	.bw-logo-cloud__intro :last-child {
+		margin-bottom: 0;
+	}
+
+	.bw-logo-cloud__grid {
+		display: grid;
+		gap: 1rem;
+	}
+
+	.bw-logo-cloud__item {
+		display: grid;
+		gap: 0.9rem;
+		align-content: start;
+		min-height: 100%;
+		padding: clamp(1rem, 2.4vw, 1.4rem);
+		border: 1px solid var(--logo-line);
+		border-radius: 1.05rem;
+		background: var(--logo-card);
+		box-shadow: var(--logo-shadow);
+	}
+
+	.bw-logo-cloud.is-surface-outline .bw-logo-cloud__item {
+		background: transparent;
+		box-shadow: none;
+	}
+
+	.bw-logo-cloud__item-link {
+		display: grid;
+		gap: 0.9rem;
+		width: 100%;
+		min-height: 100%;
+		color: inherit;
+		text-decoration: none;
+	}
+
+	.bw-logo-cloud__media {
+		display: flex;
+		align-items: center;
+		min-height: 3.25rem;
+	}
+
+	.bw-logo-cloud__image {
+		display: block;
+		width: auto;
+		max-width: 100%;
+		max-height: 2.5rem;
+		object-fit: contain;
+	}
+
+	.bw-logo-cloud__fallback {
+		font-size: clamp(1rem, 2vw, 1.1rem);
+		font-weight: 700;
+		line-height: 1.2;
+		letter-spacing: -0.02em;
+		text-wrap: balance;
+	}
+
+	.bw-logo-cloud__item-copy {
+		display: grid;
+		gap: 0.45rem;
+		align-content: start;
+	}
+
+	.bw-logo-cloud__name {
+		margin: 0;
+		font-size: clamp(1rem, 2vw, 1.08rem);
+		font-weight: 700;
+		line-height: 1.2;
+	}
+
+	.bw-logo-cloud__note {
+		margin: 0;
+		font-size: 0.96rem;
+		line-height: 1.6;
+		color: var(--logo-muted);
+	}
+
+	.bw-logo-cloud__note :first-child {
+		margin-top: 0;
+	}
+
+	.bw-logo-cloud__note :last-child {
+		margin-bottom: 0;
+	}
+
+	.bw-logo-cloud.is-layout-wall .bw-logo-cloud__note {
+		display: none;
+	}
+
+	@media (min-width: 720px) {
+		.bw-logo-cloud__grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (min-width: 1100px) {
+		.bw-logo-cloud__inner {
+			grid-template-columns: minmax(15rem, 0.85fr) minmax(0, 1.15fr);
+			align-items: start;
+		}
+
+		.bw-logo-cloud.is-layout-wall .bw-logo-cloud__grid {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+
+		.bw-logo-cloud.is-layout-editorial .bw-logo-cloud__grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+</style>

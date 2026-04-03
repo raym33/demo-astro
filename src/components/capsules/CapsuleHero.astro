@@ -1,0 +1,304 @@
+---
+import SiteIcon from '../system/SiteIcon.astro';
+
+interface Props {
+	align?: 'wide' | 'full';
+	eyebrow?: string;
+	title: string;
+	intro?: string;
+	ctaLabel?: string;
+	ctaUrl?: string;
+	mediaUrl?: string;
+	mediaAlt?: string;
+	theme?: 'paper' | 'ink' | 'signal';
+	layout?: 'split' | 'stacked';
+	surface?: 'soft' | 'hard' | 'outline';
+}
+
+const {
+	align = 'full',
+	eyebrow = '',
+	title,
+	intro = '',
+	ctaLabel = '',
+	ctaUrl = '',
+	mediaUrl = '',
+	mediaAlt = '',
+	theme = 'paper',
+	layout = 'split',
+	surface = 'soft',
+} = Astro.props;
+---
+
+<section class:list={['bw-shell', align === 'full' ? 'is-full' : 'is-wide']}>
+	<div
+		class:list={[
+			'bw-hero',
+			`is-theme-${theme}`,
+			`is-layout-${layout}`,
+			`is-surface-${surface}`,
+			mediaUrl ? 'has-media' : 'has-no-media',
+		]}
+	>
+		<div class="bw-hero__grid">
+			<div class="bw-hero__content">
+				{eyebrow ? <p class="bw-hero__eyebrow">{eyebrow}</p> : null}
+				<h1 class="bw-hero__title">{title}</h1>
+				{intro ? <div class="bw-hero__intro" set:html={intro} /> : null}
+				{ctaLabel ? (
+					<div class="bw-hero__cta-group">
+						<a class="bw-hero__cta" href={ctaUrl || '#'}>
+							<span>{ctaLabel}</span>
+							<SiteIcon
+								name="arrow_forward"
+								size="sm"
+								className="bw-hero__cta-icon"
+							/>
+						</a>
+					</div>
+				) : null}
+			</div>
+
+			<div class="bw-hero__media" aria-hidden={mediaUrl ? undefined : 'true'}>
+				{mediaUrl ? (
+					<figure class="bw-hero__media-frame">
+						<img class="bw-hero__image" src={mediaUrl} alt={mediaAlt || title} />
+					</figure>
+				) : (
+					<div class="bw-hero__media-placeholder" />
+				)}
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.bw-hero {
+		--hero-paper: #f2eee6;
+		--hero-ink: #141111;
+		--hero-accent: #ff6f3c;
+		--hero-line: rgba(20, 17, 17, 0.12);
+		--hero-muted: rgba(20, 17, 17, 0.7);
+		--hero-panel: rgba(255, 255, 255, 0.48);
+		--hero-shadow: 0 32px 80px rgba(28, 21, 21, 0.12);
+		position: relative;
+		overflow: clip;
+		border-radius: clamp(1.5rem, 4vw, 2.5rem);
+		background:
+			radial-gradient(circle at top left, rgba(255, 111, 60, 0.2), transparent 34%),
+			linear-gradient(135deg, rgba(255, 255, 255, 0.88), rgba(255, 248, 243, 0.56));
+		color: var(--hero-ink);
+		box-shadow: var(--hero-shadow);
+	}
+
+	.bw-hero::before {
+		content: '';
+		position: absolute;
+		inset: auto auto -12% -6%;
+		width: clamp(12rem, 26vw, 22rem);
+		aspect-ratio: 1;
+		border-radius: 999px;
+		background: rgba(255, 111, 60, 0.18);
+		filter: blur(16px);
+		pointer-events: none;
+	}
+
+	.bw-hero.is-theme-ink {
+		--hero-paper: #111011;
+		--hero-ink: #f5efe8;
+		--hero-accent: #f8a23b;
+		--hero-line: rgba(245, 239, 232, 0.14);
+		--hero-muted: rgba(245, 239, 232, 0.76);
+		--hero-panel: rgba(255, 255, 255, 0.06);
+		background:
+			radial-gradient(circle at top left, rgba(248, 162, 59, 0.2), transparent 34%),
+			linear-gradient(135deg, #121011, #221d1b 52%, #111011);
+	}
+
+	.bw-hero.is-theme-signal {
+		--hero-paper: #f7f2e7;
+		--hero-ink: #171312;
+		--hero-accent: #2d57ff;
+		--hero-line: rgba(23, 19, 18, 0.12);
+		--hero-muted: rgba(23, 19, 18, 0.72);
+		--hero-panel: rgba(255, 255, 255, 0.55);
+		background:
+			radial-gradient(circle at top left, rgba(45, 87, 255, 0.18), transparent 36%),
+			linear-gradient(125deg, #f7f2e7, #efe7d4 50%, #f8f4ea);
+	}
+
+	.bw-hero.is-surface-hard {
+		background-image: none;
+		background-color: var(--hero-paper);
+	}
+
+	.bw-hero.is-surface-outline {
+		background: transparent;
+		border: 1px solid var(--hero-line);
+		box-shadow: none;
+	}
+
+	.bw-hero__grid {
+		position: relative;
+		display: grid;
+		grid-template-columns: minmax(0, 1fr);
+		gap: clamp(1.5rem, 4vw, 3rem);
+		align-items: stretch;
+		padding: clamp(1.4rem, 4vw, 3.5rem);
+	}
+
+	.bw-hero__content,
+	.bw-hero__media {
+		min-width: 0;
+	}
+
+	.bw-hero__content {
+		position: relative;
+		z-index: 1;
+		display: grid;
+		align-content: center;
+		gap: 1.1rem;
+	}
+
+	.bw-hero__eyebrow {
+		margin: 0;
+		font-size: 0.82rem;
+		font-weight: 700;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+		color: var(--hero-accent);
+	}
+
+	.bw-hero__title {
+		margin: 0;
+		max-width: 15ch;
+		font-family: var(--bw-font-display);
+		font-size: clamp(2.4rem, 7vw, 5.5rem);
+		line-height: 0.95;
+		letter-spacing: -0.05em;
+		text-wrap: balance;
+	}
+
+	.bw-hero.is-layout-split .bw-hero__title {
+		max-width: 11ch;
+	}
+
+	.bw-hero__intro {
+		max-width: 50rem;
+		color: var(--hero-muted);
+		font-size: clamp(1rem, 2.2vw, 1.25rem);
+		line-height: 1.55;
+	}
+
+	.bw-hero__intro :first-child {
+		margin-top: 0;
+	}
+
+	.bw-hero__intro :last-child {
+		margin-bottom: 0;
+	}
+
+	.bw-hero__cta-group {
+		display: flex;
+		flex-wrap: wrap;
+		margin-top: 0.4rem;
+	}
+
+	.bw-hero__cta {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.55rem;
+		min-height: 3rem;
+		padding: 0.85rem 1.2rem;
+		border-radius: 999px;
+		background: var(--hero-ink);
+		color: var(--hero-paper);
+		font-weight: 700;
+		text-decoration: none;
+		transition:
+			transform 180ms ease,
+			opacity 180ms ease,
+			background-color 180ms ease;
+	}
+
+	.bw-hero__cta:hover {
+		transform: translateY(-1px);
+		opacity: 0.96;
+	}
+
+	.bw-hero__media {
+		position: relative;
+		display: grid;
+		min-height: clamp(18rem, 48vw, 32rem);
+	}
+
+	.bw-hero__media-frame,
+	.bw-hero__media-placeholder {
+		position: relative;
+		height: 100%;
+		min-height: inherit;
+		overflow: hidden;
+		border: 1px solid var(--hero-line);
+		border-radius: clamp(1.25rem, 3vw, 2rem);
+		background:
+			linear-gradient(180deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0)),
+			var(--hero-panel);
+		backdrop-filter: blur(10px);
+	}
+
+	.bw-hero__media-placeholder::before,
+	.bw-hero__media-placeholder::after {
+		content: '';
+		position: absolute;
+		border-radius: 999px;
+	}
+
+	.bw-hero__media-placeholder::before {
+		inset: 8% 14% auto auto;
+		width: 38%;
+		aspect-ratio: 1;
+		background: rgba(255, 111, 60, 0.25);
+		filter: blur(8px);
+	}
+
+	.bw-hero__media-placeholder::after {
+		right: 10%;
+		bottom: 10%;
+		width: 54%;
+		aspect-ratio: 1;
+		background:
+			repeating-linear-gradient(
+				135deg,
+				rgba(255, 255, 255, 0.08) 0,
+				rgba(255, 255, 255, 0.08) 0.8rem,
+				transparent 0.8rem,
+				transparent 1.6rem
+			),
+			linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.18));
+	}
+
+	.bw-hero__image {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	@media (min-width: 960px) {
+		.bw-hero.is-layout-split .bw-hero__grid {
+			grid-template-columns: minmax(0, 1.08fr) minmax(21rem, 0.92fr);
+		}
+
+		.bw-hero.is-layout-split .bw-hero__media {
+			padding-top: 5%;
+		}
+
+		.bw-hero.is-layout-stacked .bw-hero__content {
+			max-width: 64rem;
+		}
+
+		.bw-hero.is-layout-stacked .bw-hero__title {
+			max-width: 14ch;
+		}
+	}
+</style>

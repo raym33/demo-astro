@@ -1,0 +1,94 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import '../../styles/examples.css';
+
+interface NavItem {
+	label: string;
+	href: string;
+}
+
+interface Props {
+	siteName: string;
+	pageTitle?: string;
+	description: string;
+	variant:
+		| 'northstar'
+		| 'elm-ivory'
+		| 'harborcare'
+		| 'fieldstone'
+		| 'briar-stone'
+		| 'brightpath'
+		| 'saffron-house'
+		| 'aureline'
+		| 'gallery';
+	tagline?: string;
+	navItems?: NavItem[];
+	homeUrl?: string;
+	primaryLabel?: string;
+	primaryUrl?: string;
+	footerNote?: string;
+}
+
+const {
+	siteName,
+	pageTitle = 'Preview',
+	description,
+	variant,
+	tagline = '',
+	navItems = [],
+	homeUrl = '/',
+	primaryLabel = '',
+	primaryUrl = '',
+	footerNote = 'Public Astro demo built from a reusable capsule system.',
+} = Astro.props;
+
+const title = `${siteName} — ${pageTitle}`;
+---
+
+<Layout
+	lang="en"
+	title={title}
+	description={description}
+	siteName={siteName}
+>
+	<div class:list={['example-site', `example-site--${variant}`]}>
+		<header class="example-site__header">
+			<div class="example-site__header-inner bw-shell">
+				<div class="example-site__brand">
+					<a class="example-site__brand-mark" href={homeUrl}>
+						<span class="example-site__brand-name">{siteName}</span>
+						{tagline ? <span class="example-site__tagline">{tagline}</span> : null}
+					</a>
+				</div>
+
+				{navItems.length ? (
+					<nav class="example-site__nav" aria-label={`${siteName} navigation`}>
+						{navItems.map((item) => (
+							<a class="example-site__nav-link" href={item.href}>{item.label}</a>
+						))}
+					</nav>
+				) : null}
+
+				{primaryLabel ? (
+					<a class="example-site__header-cta" href={primaryUrl || '#contact'}>
+						{primaryLabel}
+					</a>
+				) : null}
+			</div>
+		</header>
+
+		<main class="example-site__main">
+			<slot />
+		</main>
+
+		<footer class="example-site__footer">
+			<div class="example-site__footer-inner bw-shell">
+				<div class="example-site__footer-copy">
+					<p class="example-site__footer-name">{siteName}</p>
+					<p class="example-site__footer-note">{footerNote}</p>
+				</div>
+				<p class="example-site__footer-meta">Open demo routes for public preview</p>
+			</div>
+		</footer>
+	</div>
+</Layout>

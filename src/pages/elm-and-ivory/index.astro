@@ -1,0 +1,162 @@
+---
+import ExampleSiteShell from '../../components/examples/ExampleSiteShell.astro';
+import CapsuleHero from '../../components/capsules/CapsuleHero.astro';
+import CapsuleFeaturePair from '../../components/capsules/CapsuleFeaturePair.astro';
+import CapsuleResourceCards from '../../components/capsules/CapsuleResourceCards.astro';
+import CapsuleTestimonialStories from '../../components/capsules/CapsuleTestimonialStories.astro';
+import CapsuleEditorialQuote from '../../components/capsules/CapsuleEditorialQuote.astro';
+import CapsuleJoinCta from '../../components/capsules/CapsuleJoinCta.astro';
+---
+
+<ExampleSiteShell
+	siteName="Elm & Ivory"
+	pageTitle="Interior Design Studio"
+	description="Dummy Astro site for a premium interior design studio."
+	variant="elm-ivory"
+	tagline="Residential interiors and hospitality styling"
+	navItems={[
+		{ label: 'Approach', href: '#approach' },
+		{ label: 'Services', href: '#services' },
+		{ label: 'Stories', href: '#stories' },
+	]}
+	primaryLabel="Start a project"
+	primaryUrl="#contact"
+>
+	<CapsuleHero
+		align="full"
+		eyebrow="Interior direction"
+		title="Rooms that feel quiet, tactile, and fully considered."
+		intro="<p>Elm &amp; Ivory designs homes, boutique stays, and shared spaces with a calm architectural rhythm. Every project balances light, proportion, materials, and the way people actually live.</p>"
+		ctaLabel="View the approach"
+		ctaUrl="#approach"
+		mediaUrl="/demo-media/elm-hero.svg"
+		mediaAlt="Abstract editorial interior placeholder"
+		theme="paper"
+		layout="stacked"
+		surface="soft"
+	/>
+
+	<section id="approach">
+		<CapsuleFeaturePair
+			eyebrow="Studio method"
+			title="We design from atmosphere first, then detail the room until it feels inevitable."
+			body="<p>Projects begin with a mood study and a practical brief. From there we move through layout, materials, custom elements, and styling so the final space feels resolved rather than decorated.</p>"
+			ctaLabel="See our process"
+			ctaUrl="#services"
+			mediaUrl="/demo-media/elm-material.svg"
+			mediaAlt="Abstract material study placeholder"
+			layout="media-start"
+			tone="sand"
+			surface="soft"
+		/>
+	</section>
+
+	<section id="services">
+		<CapsuleResourceCards
+			eyebrow="Services"
+			heading="Three ways we shape the project depending on how involved the brief needs us to be."
+			intro="<p>Some clients need a complete interior direction. Others need a fast refresh of one key room. We structure the scope so decisions stay clear and momentum stays visible.</p>"
+			layout="grid"
+			theme="paper"
+			surface="soft"
+			items={[
+				{
+					eyebrow: 'Service 01',
+					title: 'Full home direction',
+					description: '<p>Spatial planning, palette, furnishings, lighting, styling, and supplier coordination for projects that need one coherent voice.</p>',
+					meta: 'Residential • 12 to 20 weeks',
+					ctaLabel: 'Explore',
+					ctaUrl: '#contact',
+					tone: 'accent',
+				},
+				{
+					eyebrow: 'Service 02',
+					title: 'Boutique hospitality styling',
+					description: '<p>Guest-facing rooms, dining areas, and reception moments shaped to feel memorable without losing operational clarity.</p>',
+					meta: 'Hospitality • Flexible scope',
+					ctaLabel: 'Explore',
+					ctaUrl: '#contact',
+					tone: 'neutral',
+				},
+				{
+					eyebrow: 'Service 03',
+					title: 'Single-room refinement',
+					description: '<p>A focused package for kitchens, bedrooms, work rooms, or salon spaces that need a strong visual reset.</p>',
+					meta: 'Selected rooms • Fast turn',
+					ctaLabel: 'Explore',
+					ctaUrl: '#contact',
+					tone: 'ink',
+				},
+			]}
+		/>
+	</section>
+
+	<section id="stories">
+		<CapsuleTestimonialStories
+			eyebrow="Client stories"
+			heading="The work lands when the space feels easier to use, not just nicer to photograph."
+			intro="<p>Most clients come to the studio because a room feels unresolved. The result they remember is usually the change in pace and confidence inside the space.</p>"
+			layout="lead-first"
+			theme="paper"
+			surface="soft"
+			items={[
+				{
+					initial: 'M',
+					name: 'Mila Rowan',
+					role: 'Townhouse owner',
+					statement: '<p>The house finally feels coherent. We stopped buying pieces at random and started living in rooms that actually relate to each other.</p>',
+					outcome: '<p>Three connected floors redesigned around circulation, storage, and softer light.</p>',
+					ctaLabel: 'Residential brief',
+					ctaUrl: '#contact',
+					tone: 'accent',
+				},
+				{
+					initial: 'J',
+					name: 'Jonas Reed',
+					role: 'Boutique hotel founder',
+					statement: '<p>Guests started mentioning the atmosphere before they mentioned the service. That shift mattered.</p>',
+					outcome: '<p>Reception, lounge, and seven rooms styled under one quieter direction.</p>',
+					ctaLabel: 'Hospitality brief',
+					ctaUrl: '#contact',
+					tone: 'neutral',
+				},
+				{
+					initial: 'L',
+					name: 'Lena Voss',
+					role: 'Creative director',
+					statement: '<p>The studio office went from improvised to considered. It now supports work instead of competing with it.</p>',
+					outcome: '<p>Materials, storage, and meeting flow reset in under six weeks.</p>',
+					ctaLabel: 'Studio brief',
+					ctaUrl: '#contact',
+					tone: 'ink',
+				},
+			]}
+		/>
+	</section>
+
+	<CapsuleEditorialQuote
+		quote="<p>Good interiors do not shout. They make the room feel inevitable, and the client feels that before they can explain it.</p>"
+		name="Eleanor Hart"
+		role="Founder and design lead"
+		mediaUrl="/demo-media/elm-hero.svg"
+		mediaAlt="Abstract studio portrait placeholder"
+		layout="portrait-end"
+		tone="sand"
+		surface="soft"
+	/>
+
+	<section id="contact">
+		<CapsuleJoinCta
+			eyebrow="Project intake"
+			title="Start with the room, the mood, and the outcome you want it to hold."
+			body="<p>Most projects begin with a short conversation, a set of reference images, and a practical note on timing. From there we shape the right level of involvement.</p>"
+			primaryLabel="Request a studio call"
+			primaryUrl="#"
+			secondaryLabel="Send your brief"
+			secondaryUrl="#"
+			meta={['Residential', 'Hospitality', 'Selected-room projects']}
+			theme="paper"
+			surface="soft"
+		/>
+	</section>
+</ExampleSiteShell>

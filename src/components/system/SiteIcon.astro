@@ -1,0 +1,44 @@
+---
+import {
+	MATERIAL_SYMBOL_DEFINITIONS,
+	type MaterialSymbolName,
+} from '../../lib/material-symbols';
+
+interface Props {
+	name: MaterialSymbolName;
+	size?: 'sm' | 'md' | 'lg';
+	filled?: boolean;
+	className?: string;
+}
+
+const {
+	name,
+	size = 'md',
+	filled = false,
+	className = '',
+} = Astro.props;
+
+const icon = MATERIAL_SYMBOL_DEFINITIONS[name];
+---
+
+<span
+	class:list={[
+		'bw-icon',
+		`is-size-${size}`,
+		filled && 'is-filled',
+		className,
+	]}
+	aria-hidden="true"
+	data-icon={name}
+>
+	<svg
+		viewBox={icon.viewBox}
+		fill="none"
+		stroke="currentColor"
+		stroke-width="1.9"
+		stroke-linecap="round"
+		stroke-linejoin="round"
+		focusable="false"
+		set:html={icon.body}
+	/>
+</span>

@@ -1,0 +1,92 @@
+---
+import '../styles/site.css';
+
+interface Props {
+	title?: string;
+	description?: string;
+	siteName?: string;
+	siteUrl?: string;
+	lang?: string;
+	canonicalPath?: string;
+	ogImage?: string;
+	ogImageAlt?: string;
+	ogImageWidth?: number;
+	ogImageHeight?: number;
+	ogImageType?: string;
+	type?: string;
+	noindex?: boolean;
+	favicon?: string;
+	structuredData?: Array<Record<string, unknown>>;
+}
+
+const {
+	title = 'Astro Demo Atlas',
+	description = 'A public gallery of premium Astro website demos built from a reusable capsule system.',
+	siteName = 'Astro Demo Atlas',
+	siteUrl = '',
+	lang = 'en',
+	canonicalPath = '',
+	ogImage = '',
+	ogImageAlt = '',
+	ogImageWidth,
+	ogImageHeight,
+	ogImageType = '',
+	type = 'website',
+	noindex = false,
+	favicon = '/favicon.svg',
+	structuredData = [],
+} = Astro.props;
+
+const robots = noindex
+	? 'noindex, nofollow, noarchive'
+	: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
+const canonicalUrl =
+	siteUrl && canonicalPath ? new URL(canonicalPath, siteUrl).toString() : '';
+const ogImageUrl =
+	siteUrl && ogImage ? new URL(ogImage, siteUrl).toString() : '';
+---
+
+<!doctype html>
+<html lang={lang}>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" href={favicon} />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={description} />
+		<meta name="robots" content={robots} />
+		<meta name="googlebot" content={robots} />
+		<meta name="author" content={siteName} />
+		<meta name="publisher" content={siteName} />
+		<meta name="format-detection" content="telephone=no,address=no,email=no" />
+		<meta name="theme-color" content="#f7f1e8" />
+		<meta property="og:locale" content="en_US" />
+		<meta property="og:type" content={type} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:site_name" content={siteName} />
+		{canonicalUrl ? <meta property="og:url" content={canonicalUrl} /> : null}
+		{ogImageUrl ? <meta property="og:image" content={ogImageUrl} /> : null}
+		{ogImageUrl ? <meta property="og:image:secure_url" content={ogImageUrl} /> : null}
+		{ogImageAlt ? <meta property="og:image:alt" content={ogImageAlt} /> : null}
+		{ogImageType ? <meta property="og:image:type" content={ogImageType} /> : null}
+		{ogImageWidth ? <meta property="og:image:width" content={String(ogImageWidth)} /> : null}
+		{ogImageHeight ? <meta property="og:image:height" content={String(ogImageHeight)} /> : null}
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		{ogImageUrl ? <meta name="twitter:image" content={ogImageUrl} /> : null}
+		{ogImageAlt ? <meta name="twitter:image:alt" content={ogImageAlt} /> : null}
+		{canonicalUrl ? <link rel="canonical" href={canonicalUrl} /> : null}
+		{canonicalUrl ? <link rel="alternate" hreflang="en-US" href={canonicalUrl} /> : null}
+		{canonicalUrl ? <link rel="alternate" hreflang="x-default" href={canonicalUrl} /> : null}
+		<title>{title}</title>
+		{structuredData.map((entry) => (
+			<script is:inline type="application/ld+json" set:html={JSON.stringify(entry)} />
+		))}
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>

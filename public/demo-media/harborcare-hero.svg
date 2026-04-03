@@ -1,0 +1,18 @@
+<svg width="1600" height="1040" viewBox="0 0 1600 1040" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="100" y1="50" x2="1360" y2="920" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D8EBDD"/>
+      <stop offset="1" stop-color="#C5DFCD"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1040" fill="url(#bg)"/>
+  <rect x="156" y="124" width="1288" height="792" rx="48" fill="#F5FBF7" stroke="#B6D0BF"/>
+  <circle cx="484" cy="494" r="206" fill="#B5D4BF"/>
+  <circle cx="484" cy="494" r="84" fill="#EDF7F0"/>
+  <rect x="834" y="250" width="426" height="62" rx="18" fill="#B8D8C2"/>
+  <rect x="834" y="348" width="356" height="62" rx="18" fill="#CFE3D5"/>
+  <rect x="834" y="446" width="292" height="62" rx="18" fill="#CFE3D5"/>
+  <rect x="834" y="596" width="428" height="156" rx="34" fill="#DBECE0"/>
+  <path d="M904 678C954 624 1002 600 1060 600C1118 600 1162 628 1198 680" stroke="#4D9471" stroke-width="12" stroke-linecap="round"/>
+  <text x="158" y="102" fill="#4F8B6A" font-family="Arial, sans-serif" font-size="24" letter-spacing="5">CARE PROGRAM / DUMMY VISUAL</text>
+</svg>

@@ -1,0 +1,180 @@
+---
+import ExampleSiteShell from '../../components/examples/ExampleSiteShell.astro';
+import CapsuleHero from '../../components/capsules/CapsuleHero.astro';
+import CapsuleFeaturePair from '../../components/capsules/CapsuleFeaturePair.astro';
+import CapsuleResourceCards from '../../components/capsules/CapsuleResourceCards.astro';
+import CapsuleProofStrip from '../../components/capsules/CapsuleProofStrip.astro';
+import CapsuleTestimonialStories from '../../components/capsules/CapsuleTestimonialStories.astro';
+import CapsuleFaqList from '../../components/capsules/CapsuleFaqList.astro';
+import CapsuleJoinCta from '../../components/capsules/CapsuleJoinCta.astro';
+---
+
+<ExampleSiteShell
+	siteName="HarborCare Clinics"
+	pageTitle="Community Care Network"
+	description="Dummy Astro site for a community clinic group."
+	variant="harborcare"
+	tagline="Primary care, family programs, and preventive support"
+	navItems={[
+		{ label: 'Care model', href: '#care' },
+		{ label: 'Programs', href: '#programs' },
+		{ label: 'FAQs', href: '#faq' },
+	]}
+	primaryLabel="Book first visit"
+	primaryUrl="#contact"
+>
+	<CapsuleHero
+		align="full"
+		eyebrow="Neighborhood clinics"
+		title="A calmer care experience for families, older adults, and busy professionals."
+		intro="<p>HarborCare combines primary care, preventive planning, and follow-up support in a single clinic network designed to feel clear from the first visit.</p>"
+		ctaLabel="Explore programs"
+		ctaUrl="#programs"
+		mediaUrl="/demo-media/harborcare-hero.svg"
+		mediaAlt="Abstract healthcare scene placeholder"
+		theme="paper"
+		layout="split"
+		surface="soft"
+	/>
+
+	<section id="care">
+		<CapsuleFeaturePair
+			eyebrow="Care model"
+			title="Every patient gets a clearer next step, not just a shorter appointment."
+			body="<p>Appointments are structured around continuity: review, treatment, next actions, and follow-up. That helps patients leave with clarity instead of more uncertainty.</p>"
+			ctaLabel="See the programs"
+			ctaUrl="#programs"
+			mediaUrl="/demo-media/harborcare-team.svg"
+			mediaAlt="Abstract care team placeholder"
+			layout="media-end"
+			tone="sage"
+			surface="soft"
+		/>
+	</section>
+
+	<section id="programs">
+		<CapsuleResourceCards
+			eyebrow="Programs"
+			heading="Four service lines built for recurring care, not one-off transactions."
+			intro="<p>Patients enter through the program that matches their current need, but follow-up remains connected across the whole care network.</p>"
+			layout="grid"
+			theme="paper"
+			surface="soft"
+			items={[
+				{
+					eyebrow: 'Program 01',
+					title: 'Family primary care',
+					description: '<p>Routine visits, treatment plans, referrals, and follow-up for households that want one steady clinic relationship.</p>',
+					meta: 'Children and adults',
+					ctaLabel: 'Learn more',
+					ctaUrl: '#contact',
+					tone: 'accent',
+				},
+				{
+					eyebrow: 'Program 02',
+					title: 'Preventive health review',
+					description: '<p>Annual planning, screening pathways, and lifestyle recommendations that turn checkups into a real care strategy.</p>',
+					meta: 'Annual review',
+					ctaLabel: 'Learn more',
+					ctaUrl: '#contact',
+					tone: 'neutral',
+				},
+				{
+					eyebrow: 'Program 03',
+					title: 'Chronic care support',
+					description: '<p>Coordinated follow-up for patients who need medication review, monitoring, and practical continuity over time.</p>',
+					meta: 'Long-term support',
+					ctaLabel: 'Learn more',
+					ctaUrl: '#contact',
+					tone: 'neutral',
+				},
+				{
+					eyebrow: 'Program 04',
+					title: 'Employer wellbeing days',
+					description: '<p>On-site or scheduled clinic sessions for local teams that want practical preventive care for staff.</p>',
+					meta: 'For local employers',
+					ctaLabel: 'Learn more',
+					ctaUrl: '#contact',
+					tone: 'ink',
+				},
+			]}
+		/>
+	</section>
+
+	<CapsuleProofStrip
+		eyebrow="Trust signals"
+		heading="The site should feel calm because the service model behind it is calm."
+		intro="<p>Healthcare sites need warmth, but they also need visible structure. These signals turn reassurance into something concrete.</p>"
+		layout="split"
+		theme="paper"
+		surface="hard"
+		featuredQuote="<p>Patients tell us they finally understand what happens after the visit. That is not a small thing.</p>"
+		featuredName="Naomi Clarke"
+		featuredRole="Clinical operations director"
+		items={[
+			{ value: '4', label: 'service lines', detail: 'Simple enough to navigate, broad enough to grow with the patient.', icon: 'layers', tone: 'accent' },
+			{ value: '48h', label: 'follow-up window', detail: 'Standard target for checking plan clarity and next actions.', icon: 'schedule', tone: 'neutral' },
+			{ value: '92%', label: 'visit clarity score', detail: 'Dummy benchmark from post-visit surveys in this concept preview.', icon: 'task_alt', tone: 'neutral' },
+		]}
+	/>
+
+	<CapsuleTestimonialStories
+		eyebrow="Patient stories"
+		heading="Most people remember how understandable the process felt."
+		intro="<p>For care services, trust is often built through clarity, rhythm, and a feeling that the team already knows the context.</p>"
+		layout="grid"
+		theme="paper"
+		surface="soft"
+		items={[
+			{
+				initial: 'A',
+				name: 'Amelia Stone',
+				role: 'Parent and patient',
+				statement: '<p>The clinic never felt rushed. We always knew what the next step was and who would follow up.</p>',
+				outcome: '<p>Family care plan consolidated into one team and one recurring review path.</p>',
+				ctaLabel: 'Family care',
+				ctaUrl: '#contact',
+				tone: 'accent',
+			},
+			{
+				initial: 'R',
+				name: 'Reid Thomas',
+				role: 'Preventive program member',
+				statement: '<p>The annual review actually felt useful. It was not just a checklist; it changed how I track my health.</p>',
+				outcome: '<p>Preventive checkup turned into a structured plan with follow-up milestones.</p>',
+				ctaLabel: 'Preventive review',
+				ctaUrl: '#contact',
+				tone: 'neutral',
+			},
+		]}
+	/>
+
+	<section id="faq">
+		<CapsuleFaqList
+			eyebrow="Common questions"
+			heading="What patients usually ask before their first visit."
+			intro="<p>For a service like this, reducing uncertainty matters as much as any visual design decision.</p>"
+			theme="paper"
+			items={[
+				{ question: 'Can I book a first appointment online?', answer: 'Yes. This concept assumes online booking, phone support, and a simple intake form.' },
+				{ question: 'Do you offer preventive reviews as a standalone service?', answer: 'Yes. Preventive reviews can be booked independently or folded into an ongoing care relationship.' },
+				{ question: 'Is employer support available for small teams?', answer: 'Yes. The concept includes structured wellbeing days and recurring support for local employers.' },
+			]}
+		/>
+	</section>
+
+	<section id="contact">
+		<CapsuleJoinCta
+			eyebrow="Book a visit"
+			title="Choose the right starting point and we will guide the rest of the care path with you."
+			body="<p>The first visit is used to understand context, review priorities, and decide whether the best path is routine care, preventive review, or follow-up support.</p>"
+			primaryLabel="Schedule first appointment"
+			primaryUrl="#"
+			secondaryLabel="Ask a question"
+			secondaryUrl="#"
+			meta={['Family care', 'Preventive review', 'Employer wellbeing']}
+			theme="paper"
+			surface="soft"
+		/>
+	</section>
+</ExampleSiteShell>

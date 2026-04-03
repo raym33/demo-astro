@@ -1,0 +1,139 @@
+---
+import ExampleSiteShell from '../../components/examples/ExampleSiteShell.astro';
+import CapsuleHero from '../../components/capsules/CapsuleHero.astro';
+import CapsuleFeaturePair from '../../components/capsules/CapsuleFeaturePair.astro';
+import CapsuleResourceCards from '../../components/capsules/CapsuleResourceCards.astro';
+import CapsuleProofStrip from '../../components/capsules/CapsuleProofStrip.astro';
+import CapsuleFaqList from '../../components/capsules/CapsuleFaqList.astro';
+import CapsuleJoinCta from '../../components/capsules/CapsuleJoinCta.astro';
+---
+
+<ExampleSiteShell
+	siteName="Briar & Stone Counsel"
+	pageTitle="Private Legal Advisory"
+	description="Dummy Astro site for a private legal advisory firm."
+	variant="briar-stone"
+	tagline="Private disputes, governance, and strategic counsel"
+	navItems={[
+		{ label: 'Practice', href: '#practice' },
+		{ label: 'Standards', href: '#standards' },
+		{ label: 'Questions', href: '#questions' },
+	]}
+	primaryLabel="Request counsel"
+	primaryUrl="#contact"
+>
+	<CapsuleHero
+		align="full"
+		eyebrow="Private legal advisory"
+		title="Precise counsel for disputes, governance, and decisions that cannot afford noise."
+		intro="<p>Briar &amp; Stone advises boards, founders, investors, and private clients on matters where clarity, discretion, and timing matter as much as the legal position itself.</p>"
+		ctaLabel="View practice areas"
+		ctaUrl="#practice"
+		mediaUrl="/demo-media/briar-hero.svg"
+		mediaAlt="Abstract legal counsel placeholder"
+		theme="paper"
+		layout="split"
+		surface="outline"
+	/>
+
+	<section id="practice">
+		<CapsuleResourceCards
+			eyebrow="Practice areas"
+			heading="A narrow practice built for matters where strategic judgment matters more than volume."
+			intro="<p>The firm is deliberately focused. Each mandate is handled with a smaller team, tighter scope definition, and direct partner involvement.</p>"
+			layout="grid"
+			theme="paper"
+			surface="outline"
+			items={[
+				{
+					eyebrow: 'Area 01',
+					title: 'Complex disputes',
+					description: '<p>Advice and representation for commercial conflict, pre-litigation strategy, and settlement framing.</p>',
+					meta: 'Boards, founders, shareholders',
+					ctaLabel: 'Discuss a matter',
+					ctaUrl: '#contact',
+					tone: 'neutral',
+				},
+				{
+					eyebrow: 'Area 02',
+					title: 'Governance and internal risk',
+					description: '<p>Counsel for boards and leadership teams facing governance pressure, internal process questions, or sensitive transitions.</p>',
+					meta: 'Board and executive matters',
+					ctaLabel: 'Discuss a matter',
+					ctaUrl: '#contact',
+					tone: 'accent',
+				},
+				{
+					eyebrow: 'Area 03',
+					title: 'Private advisory',
+					description: '<p>Discrete support for high-trust situations involving negotiation, reputation, and long-term positioning.</p>',
+					meta: 'Private clients and family offices',
+					ctaLabel: 'Discuss a matter',
+					ctaUrl: '#contact',
+					tone: 'ink',
+				},
+			]}
+		/>
+	</section>
+
+	<CapsuleFeaturePair
+		eyebrow="Working standard"
+		title="We do not perform legal theatre. We define position, leverage, and the shortest credible path forward."
+		body="<p>That often means fewer documents, tighter case framing, and stronger early decisions. Clients retain the firm when they need a clearer route, not a louder process.</p>"
+		ctaLabel="See firm standards"
+		ctaUrl="#standards"
+		mediaUrl="/demo-media/briar-library.svg"
+		mediaAlt="Abstract legal library placeholder"
+		layout="media-end"
+		tone="sand"
+		surface="outline"
+	/>
+
+	<section id="standards">
+		<CapsuleProofStrip
+			eyebrow="Engagement standard"
+			heading="Authority is built through restraint, timing, and clean written judgment."
+			intro="<p>The firm site should feel ordered and quiet because the service itself is built around discipline, not spectacle.</p>"
+			layout="split"
+			theme="paper"
+			surface="outline"
+			featuredQuote="<p>The value was not just the legal advice. It was that every option, risk, and consequence became legible within one conversation.</p>"
+			featuredName="Private client testimonial"
+			featuredRole="Dummy concept quote"
+			items={[
+				{ value: '1', label: 'lead partner on every mandate', detail: 'Senior involvement remains direct from framing to outcome.', icon: 'task_alt', tone: 'neutral' },
+				{ value: '24h', label: 'rapid intake target', detail: 'Urgent matters are assessed quickly and either scoped or declined with clarity.', icon: 'schedule', tone: 'neutral' },
+				{ value: 'Small', label: 'matter load', detail: 'Capacity is protected so mandates do not become operational noise.', icon: 'layers', tone: 'accent' },
+			]}
+		/>
+	</section>
+
+	<section id="questions">
+		<CapsuleFaqList
+			eyebrow="First questions"
+			heading="What serious clients usually need to know before reaching out."
+			intro="<p>On legal sites, this layer helps people qualify fit without forcing them into a generic contact flow too early.</p>"
+			theme="paper"
+			items={[
+				{ question: 'Do you accept time-sensitive matters?', answer: 'Yes. The concept assumes a rapid initial assessment for disputes, governance pressure, and urgent advisory matters.' },
+				{ question: 'Do you work with in-house counsel or external advisers already involved?', answer: 'Yes. The model supports lead advisory or a smaller role inside an existing adviser group.' },
+				{ question: 'Is every matter accepted?', answer: 'No. The concept is intentionally selective so the firm can stay partner-led and strategically useful.' },
+			]}
+		/>
+	</section>
+
+	<section id="contact">
+		<CapsuleJoinCta
+			eyebrow="Confidential intake"
+			title="If the matter is sensitive, urgent, or unusually exposed, start with a short confidential brief."
+			body="<p>The first step is usually a concise note on the issue, timeline, and current adviser context. From there the firm confirms fit and the right engagement path.</p>"
+			primaryLabel="Request confidential review"
+			primaryUrl="#"
+			secondaryLabel="Send an overview"
+			secondaryUrl="#"
+			meta={['Disputes', 'Governance', 'Private matters']}
+			theme="paper"
+			surface="outline"
+		/>
+	</section>
+</ExampleSiteShell>

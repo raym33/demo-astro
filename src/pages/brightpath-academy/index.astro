@@ -1,0 +1,172 @@
+---
+import ExampleSiteShell from '../../components/examples/ExampleSiteShell.astro';
+import CapsuleHero from '../../components/capsules/CapsuleHero.astro';
+import CapsuleProductTabs from '../../components/capsules/CapsuleProductTabs.astro';
+import CapsuleStickySteps from '../../components/capsules/CapsuleStickySteps.astro';
+import CapsuleTestimonialStories from '../../components/capsules/CapsuleTestimonialStories.astro';
+import CapsuleJoinCta from '../../components/capsules/CapsuleJoinCta.astro';
+---
+
+<ExampleSiteShell
+	siteName="Brightpath Academy"
+	pageTitle="Modern Learning Brand"
+	description="Dummy Astro site for a modern academy and education brand."
+	variant="brightpath"
+	tagline="Applied learning for ambitious students and working professionals"
+	navItems={[
+		{ label: 'Programs', href: '#programs' },
+		{ label: 'Admissions', href: '#admissions' },
+		{ label: 'Stories', href: '#stories' },
+	]}
+	primaryLabel="Start application"
+	primaryUrl="#contact"
+>
+	<CapsuleHero
+		align="full"
+		eyebrow="Brightpath Academy"
+		title="A sharper learning experience for ambitious students and career movers."
+		intro="<p>Brightpath blends structured teaching, live coaching, and project-based work so learners build outcomes they can actually use beyond the classroom.</p>"
+		ctaLabel="Explore programs"
+		ctaUrl="#programs"
+		mediaUrl="/demo-media/brightpath-hero.svg"
+		mediaAlt="Abstract academy placeholder"
+		theme="signal"
+		layout="stacked"
+		surface="soft"
+	/>
+
+	<section id="programs">
+		<CapsuleProductTabs
+			align="full"
+			eyebrow="Learning tracks"
+			heading="Different learner paths, one common standard: visible progress."
+			intro="<p>The site separates school-age, adult, and executive routes so each audience gets a clear reason to act without sharing the same language.</p>"
+			theme="paper"
+			surface="soft"
+			items={[
+				{
+					label: 'Students',
+					title: 'Academic support with stronger project outcomes',
+					description: '<p>For students who want more than tutoring: structured learning, accountability, and portfolio-level work.</p>',
+					mediaLabel: 'Students',
+					mediaUrl: '/demo-media/brightpath-campus.svg',
+					mediaAlt: 'Abstract learning campus placeholder',
+					tone: 'blue',
+				},
+				{
+					label: 'Professionals',
+					title: 'Career-change pathways built around applied learning',
+					description: '<p>Adults move through intensive cohorts, guided assignments, and coaching sessions that turn learning into transition momentum.</p>',
+					mediaLabel: 'Professionals',
+					mediaUrl: '/demo-media/brightpath-hero.svg',
+					mediaAlt: 'Abstract academy visual placeholder',
+					tone: 'green',
+				},
+				{
+					label: 'Leadership',
+					title: 'Short executive programs for teams and emerging leaders',
+					description: '<p>Compact learning products for organizations that want practical skill-building without a long academic cycle.</p>',
+					mediaLabel: 'Leadership',
+					mediaUrl: '/demo-media/brightpath-campus.svg',
+					mediaAlt: 'Abstract campus grid placeholder',
+					tone: 'clay',
+				},
+			]}
+		/>
+	</section>
+
+	<section id="admissions">
+		<CapsuleStickySteps
+			eyebrow="Admissions"
+			heading="A fast admissions path that feels guided instead of bureaucratic."
+			intro="<p>Education sites often lose people in friction. This version turns the path into a visible sequence with enough detail to feel credible.</p>"
+			layout="progressive"
+			theme="signal"
+			surface="hard"
+			items={[
+				{
+					label: 'Step 01',
+					title: 'Choose the track that matches your current stage',
+					description: '<p>The first decision is not “apply now”; it is finding the right learning route based on age, ambition, and time horizon.</p>',
+					detail: 'Result: the applicant knows where they belong.',
+					mediaUrl: '/demo-media/brightpath-hero.svg',
+					mediaAlt: 'Abstract learning route placeholder',
+				},
+				{
+					label: 'Step 02',
+					title: 'Complete a short fit form and intake review',
+					description: '<p>The academy reviews goals, current level, and readiness before suggesting the strongest next step.</p>',
+					detail: 'Result: a more intentional admissions conversation.',
+					mediaUrl: '/demo-media/brightpath-campus.svg',
+					mediaAlt: 'Abstract admissions grid',
+				},
+				{
+					label: 'Step 03',
+					title: 'Start with a clear plan, cohort date, and support rhythm',
+					description: '<p>Accepted learners receive timing, cohort details, and the real structure behind delivery, not just a welcome email.</p>',
+					detail: 'Result: momentum starts before day one.',
+					mediaUrl: '/demo-media/brightpath-hero.svg',
+					mediaAlt: 'Abstract launch placeholder',
+				},
+			]}
+		/>
+	</section>
+
+	<section id="stories">
+		<CapsuleTestimonialStories
+			eyebrow="Learner stories"
+			heading="What students remember is not the platform. It is the feeling of forward motion."
+			intro="<p>A stronger education site should make outcomes and student rhythm feel visible before the first application.</p>"
+			layout="lead-first"
+			theme="signal"
+			surface="soft"
+			items={[
+				{
+					initial: 'K',
+					name: 'Kira Watts',
+					role: 'Secondary student',
+					statement: '<p>I stopped feeling like I was just catching up. I had a plan, weekly checkpoints, and work I could actually show.</p>',
+					outcome: '<p>Academic support converted into portfolio work and stronger confidence.</p>',
+					ctaLabel: 'Student pathway',
+					ctaUrl: '#contact',
+					tone: 'accent',
+				},
+				{
+					initial: 'M',
+					name: 'Marcus Hale',
+					role: 'Career-change learner',
+					statement: '<p>The structure helped more than the content alone. I knew what to do every week and why it mattered.</p>',
+					outcome: '<p>Transition plan built through applied assignments and coaching.</p>',
+					ctaLabel: 'Professional pathway',
+					ctaUrl: '#contact',
+					tone: 'neutral',
+				},
+				{
+					initial: 'D',
+					name: 'Dana Birch',
+					role: 'Team lead',
+					statement: '<p>The executive cohort was compact, practical, and easy to bring back into work immediately.</p>',
+					outcome: '<p>Leadership training packaged into a shorter operational format.</p>',
+					ctaLabel: 'Executive pathway',
+					ctaUrl: '#contact',
+					tone: 'ink',
+				},
+			]}
+		/>
+	</section>
+
+	<section id="contact">
+		<CapsuleJoinCta
+			eyebrow="Apply"
+			title="Choose your track, complete the intake, and start from a clearer position."
+			body="<p>This concept is designed to make education feel active and directional, not passive or institutional. The next step should feel obvious.</p>"
+			primaryLabel="Start application"
+			primaryUrl="#"
+			secondaryLabel="Book an advisor call"
+			secondaryUrl="#"
+			meta={['Students', 'Professionals', 'Executive cohorts']}
+			theme="signal"
+			surface="soft"
+		/>
+	</section>
+</ExampleSiteShell>

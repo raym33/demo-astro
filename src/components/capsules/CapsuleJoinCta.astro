@@ -1,0 +1,280 @@
+---
+import SiteIcon from '../system/SiteIcon.astro';
+
+interface Props {
+	align?: 'wide' | 'full';
+	eyebrow?: string;
+	title?: string;
+	body?: string;
+	primaryLabel?: string;
+	primaryUrl?: string;
+	secondaryLabel?: string;
+	secondaryUrl?: string;
+	meta?: string[];
+	theme?: 'paper' | 'ink' | 'signal';
+	surface?: 'soft' | 'outline';
+}
+
+const {
+	align = 'wide',
+	eyebrow = '',
+	title = '',
+	body = '',
+	primaryLabel = '',
+	primaryUrl = '',
+	secondaryLabel = '',
+	secondaryUrl = '',
+	meta = [],
+	theme = 'signal',
+	surface = 'soft',
+} = Astro.props;
+---
+
+{title ? (
+	<section class:list={['bw-shell', align === 'full' ? 'is-full' : 'is-wide']}>
+		<div
+			class:list={[
+				'bw-join-cta',
+				`is-theme-${theme}`,
+				`is-surface-${surface}`,
+				meta.length ? 'has-meta' : 'has-no-meta',
+			]}
+		>
+			<div class="bw-join-cta__grid">
+				<div class="bw-join-cta__copy">
+					{eyebrow ? <p class="bw-join-cta__eyebrow">{eyebrow}</p> : null}
+					<h2 class="bw-join-cta__title">{title}</h2>
+					{body ? <div class="bw-join-cta__body" set:html={body} /> : null}
+
+					{primaryLabel || secondaryLabel ? (
+						<div class="bw-join-cta__actions">
+							{primaryLabel ? (
+								<a class="bw-join-cta__button is-primary" href={primaryUrl || '#'}>
+									<span>{primaryLabel}</span>
+									<SiteIcon
+										name="arrow_forward"
+										size="sm"
+										className="bw-join-cta__button-icon"
+									/>
+								</a>
+							) : null}
+
+							{secondaryLabel ? (
+								<a class="bw-join-cta__button is-secondary" href={secondaryUrl || '#'}>
+									<span>{secondaryLabel}</span>
+									<SiteIcon
+										name="arrow_outward"
+										size="sm"
+										className="bw-join-cta__button-icon"
+									/>
+								</a>
+							) : null}
+						</div>
+					) : null}
+				</div>
+
+				{meta.length ? (
+					<div class="bw-join-cta__meta">
+						{meta.map((item) => (
+							<div class="bw-join-cta__pill">
+								<SiteIcon
+									name="check_circle"
+									size="sm"
+									className="bw-join-cta__pill-icon"
+								/>
+								<span>{item}</span>
+							</div>
+						))}
+					</div>
+				) : null}
+			</div>
+		</div>
+	</section>
+) : null}
+
+<style>
+	.bw-join-cta {
+		--join-bg: #f2ddd0;
+		--join-panel: rgba(255, 248, 242, 0.76);
+		--join-ink: #33231b;
+		--join-muted: rgba(51, 35, 27, 0.74);
+		--join-line: rgba(51, 35, 27, 0.12);
+		--join-accent: #bf5b31;
+		--join-shadow: 0 24px 56px rgba(103, 56, 35, 0.14);
+		position: relative;
+		overflow: clip;
+		border-radius: clamp(1rem, 2.6vw, 1.9rem);
+		background:
+			radial-gradient(circle at top right, rgba(255, 255, 255, 0.34), transparent 26%),
+			linear-gradient(135deg, #f0cbb6 0%, var(--join-bg) 46%, #f5e6db 100%);
+		color: var(--join-ink);
+	}
+
+	.bw-join-cta.is-theme-paper {
+		--join-bg: #f2ece3;
+		--join-panel: rgba(255, 255, 255, 0.76);
+		--join-ink: #322c28;
+		--join-muted: rgba(50, 44, 40, 0.72);
+		--join-line: rgba(50, 44, 40, 0.12);
+		--join-accent: #8f6a52;
+		--join-shadow: 0 22px 52px rgba(52, 44, 37, 0.08);
+		background:
+			radial-gradient(circle at top right, rgba(255, 255, 255, 0.3), transparent 25%),
+			linear-gradient(135deg, #ebe2d6 0%, #f4eee6 52%, #fbf7f1 100%);
+	}
+
+	.bw-join-cta.is-theme-ink {
+		--join-bg: #161312;
+		--join-panel: rgba(248, 240, 236, 0.08);
+		--join-ink: #f7efe8;
+		--join-muted: rgba(247, 239, 232, 0.76);
+		--join-line: rgba(247, 239, 232, 0.12);
+		--join-accent: #efb989;
+		--join-shadow: 0 26px 60px rgba(0, 0, 0, 0.3);
+		background:
+			radial-gradient(circle at top right, rgba(255, 255, 255, 0.08), transparent 24%),
+			linear-gradient(135deg, #332621 0%, #171312 52%, #0f0e0e 100%);
+	}
+
+	.bw-join-cta.is-surface-outline {
+		background: transparent;
+		border: 1px solid var(--join-line);
+	}
+
+	.bw-join-cta__grid {
+		display: grid;
+		gap: clamp(1.2rem, 3vw, 2.25rem);
+		padding: clamp(1.4rem, 4vw, 3rem);
+	}
+
+	.bw-join-cta__copy {
+		display: grid;
+		gap: 1rem;
+		align-content: start;
+	}
+
+	.bw-join-cta__eyebrow {
+		margin: 0;
+		font-size: 0.8rem;
+		font-weight: 700;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--join-accent);
+	}
+
+	.bw-join-cta__title {
+		margin: 0;
+		max-width: 16ch;
+		font-family: var(--bw-font-display);
+		font-size: clamp(2rem, 4.8vw, 3.35rem);
+		line-height: 1.02;
+		letter-spacing: -0.045em;
+		text-wrap: balance;
+	}
+
+	.bw-join-cta__body {
+		max-width: 46rem;
+		font-size: clamp(1rem, 2vw, 1.06rem);
+		line-height: 1.74;
+		color: var(--join-muted);
+	}
+
+	.bw-join-cta__body :first-child {
+		margin-top: 0;
+	}
+
+	.bw-join-cta__body :last-child {
+		margin-bottom: 0;
+	}
+
+	.bw-join-cta__actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		margin-top: 0.3rem;
+	}
+
+	.bw-join-cta__button {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		min-height: 3rem;
+		padding: 0.8rem 1rem;
+		border-radius: 999px;
+		border: 1px solid var(--join-line);
+		color: inherit;
+		font-size: 0.86rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		text-decoration: none;
+		transition:
+			transform 180ms ease,
+			background-color 180ms ease,
+			border-color 180ms ease;
+	}
+
+	.bw-join-cta__button.is-primary {
+		background: rgba(255, 255, 255, 0.84);
+	}
+
+	.bw-join-cta.is-theme-ink .bw-join-cta__button.is-primary {
+		background: rgba(248, 240, 236, 0.12);
+	}
+
+	.bw-join-cta__button.is-secondary {
+		background: transparent;
+	}
+
+	.bw-join-cta__button:hover {
+		transform: translateY(-1px);
+	}
+
+	.bw-join-cta__button-icon {
+		transition: transform 180ms ease;
+	}
+
+	.bw-join-cta__button:hover .bw-join-cta__button-icon {
+		transform: translateX(2px);
+	}
+
+	.bw-join-cta__meta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.7rem;
+		align-content: start;
+	}
+
+	.bw-join-cta__pill {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.55rem;
+		min-height: 2.65rem;
+		padding: 0.6rem 0.85rem;
+		border: 1px solid var(--join-line);
+		border-radius: 999px;
+		background: var(--join-panel);
+		box-shadow: var(--join-shadow);
+		font-size: 0.82rem;
+		font-weight: 700;
+	}
+
+	.bw-join-cta__pill-icon {
+		color: var(--join-accent);
+	}
+
+	.bw-join-cta.is-surface-outline .bw-join-cta__pill {
+		box-shadow: none;
+	}
+
+	@media (min-width: 1040px) {
+		.bw-join-cta__grid {
+			grid-template-columns: minmax(0, 1.15fr) minmax(18rem, 0.85fr);
+			align-items: end;
+		}
+
+		.bw-join-cta__meta {
+			justify-content: flex-end;
+		}
+	}
+</style>

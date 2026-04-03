@@ -1,0 +1,371 @@
+---
+interface ProductTabItem {
+	label?: string;
+	title?: string;
+	description?: string;
+	mediaLabel?: string;
+	mediaUrl?: string;
+	mediaAlt?: string;
+	tone?: 'blue' | 'green' | 'deep-blue' | 'graphite' | 'clay';
+}
+
+interface Props {
+	align?: 'wide' | 'full';
+	eyebrow?: string;
+	heading?: string;
+	intro?: string;
+	theme?: 'paper' | 'ink';
+	surface?: 'soft' | 'outline';
+	initialTab?: number;
+	items: ProductTabItem[];
+}
+
+const {
+	align = 'wide',
+	eyebrow = '',
+	heading = '',
+	intro = '',
+	theme = 'paper',
+	surface = 'soft',
+	initialTab = 0,
+	items = [],
+} = Astro.props;
+
+const safeInitialTab = Math.max(0, Math.min(initialTab, Math.max(0, items.length - 1)));
+const instanceId = `bw-product-tabs-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+{items.length ? (
+	<section class:list={['bw-shell', align === 'full' ? 'is-full' : 'is-wide']}>
+		<div
+			class:list={[
+				'bw-product-tabs',
+				`is-theme-${theme}`,
+				`is-surface-${surface}`,
+				`has-${items.length}-items`,
+			]}
+			data-tabs-root
+			data-tabs-ready="false"
+			data-initial-index={String(safeInitialTab)}
+		>
+			<div class="bw-product-tabs__inner">
+				{eyebrow ? <p class="bw-product-tabs__eyebrow">{eyebrow}</p> : null}
+				{heading ? <h2 class="bw-product-tabs__heading">{heading}</h2> : null}
+				{intro ? <div class="bw-product-tabs__intro" set:html={intro} /> : null}
+
+				<div class="bw-product-tabs__tablist" role="tablist" aria-label="Product tabs">
+					{items.map((item, index) => {
+						const tabId = `${instanceId}-tab-${index}`;
+						const panelId = `${instanceId}-panel-${index}`;
+						const isActive = index === safeInitialTab;
+
+						return (
+							<a
+								class:list={['bw-product-tabs__tab', isActive && 'is-active']}
+								href={`#${panelId}`}
+								role="tab"
+								id={tabId}
+								aria-controls={panelId}
+								aria-selected={isActive ? 'true' : 'false'}
+								tabindex={isActive ? '0' : '-1'}
+								data-tab-button
+								data-tab-index={String(index)}
+								data-tab-target={panelId}
+							>
+								{item.label || `Tab ${index + 1}`}
+							</a>
+						);
+					})}
+				</div>
+
+				{items.map((item, index) => {
+					const tabId = `${instanceId}-tab-${index}`;
+					const panelId = `${instanceId}-panel-${index}`;
+					const isActive = index === safeInitialTab;
+					const tone = item.tone || 'blue';
+					const mediaLabel = item.mediaLabel || item.label || `Tab ${index + 1}`;
+
+					return (
+						<div
+							class:list={['bw-product-tabs__panel', isActive && 'is-active']}
+							id={panelId}
+							role="tabpanel"
+							aria-labelledby={tabId}
+							data-tab-panel
+							data-tab-index={String(index)}
+						>
+							<div class="bw-product-tabs__media">
+								{item.mediaUrl ? (
+									<figure class:list={['bw-product-tabs__media-frame', `is-tone-${tone}`]}>
+										<img
+											class="bw-product-tabs__image"
+											src={item.mediaUrl}
+											alt={item.mediaAlt || mediaLabel}
+										/>
+										<div class="bw-product-tabs__media-badge">{mediaLabel}</div>
+									</figure>
+								) : (
+									<div class:list={['bw-product-tabs__media-frame', `is-tone-${tone}`]}>
+										<div class="bw-product-tabs__media-placeholder">{mediaLabel}</div>
+									</div>
+								)}
+							</div>
+
+							<div class="bw-product-tabs__panel-content">
+								{item.title ? (
+									<h3 class="bw-product-tabs__panel-title">{item.title}</h3>
+								) : null}
+								{item.description ? (
+									<div
+										class="bw-product-tabs__panel-description"
+										set:html={item.description}
+									/>
+								) : null}
+							</div>
+						</div>
+					);
+				})}
+			</div>
+		</div>
+	</section>
+) : null}
+
+<script is:inline src="/scripts/product-tabs.js"></script>
+
+<style>
+	.bw-product-tabs {
+		--tabs-paper: #fef9ed;
+		--tabs-ink: #5d524b;
+		--tabs-pill: #f7ecd9;
+		--tabs-border: rgba(93, 82, 75, 0.12);
+		--tabs-muted: rgba(93, 82, 75, 0.75);
+		--tabs-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+		--tabs-panel-shadow: 0 30px 70px rgba(93, 82, 75, 0.08);
+		position: relative;
+		color: var(--tabs-ink);
+	}
+
+	.bw-product-tabs.is-theme-ink {
+		--tabs-paper: #191414;
+		--tabs-ink: #f6efe8;
+		--tabs-pill: #2b2321;
+		--tabs-border: rgba(246, 239, 232, 0.12);
+		--tabs-muted: rgba(246, 239, 232, 0.74);
+		--tabs-shadow: 0 2px 14px rgba(0, 0, 0, 0.22);
+		--tabs-panel-shadow: 0 28px 70px rgba(0, 0, 0, 0.28);
+	}
+
+	.bw-product-tabs__inner {
+		display: grid;
+		gap: 1.5rem;
+		text-align: center;
+	}
+
+	.bw-product-tabs__eyebrow {
+		margin: 0;
+		font-size: 0.8rem;
+		font-weight: 700;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: color-mix(in srgb, var(--tabs-ink) 70%, #c97e52 30%);
+	}
+
+	.bw-product-tabs__heading {
+		margin: 0 auto;
+		max-width: 48rem;
+		font-family: var(--bw-font-display);
+		font-size: clamp(1.85rem, 4.2vw, 3rem);
+		line-height: 1.12;
+		letter-spacing: -0.03em;
+		text-wrap: balance;
+	}
+
+	.bw-product-tabs__intro {
+		max-width: 48rem;
+		margin: 0 auto;
+		font-size: 0.98rem;
+		line-height: 1.75;
+		color: var(--tabs-muted);
+	}
+
+	.bw-product-tabs__intro :first-child {
+		margin-top: 0;
+	}
+
+	.bw-product-tabs__intro :last-child {
+		margin-bottom: 0;
+	}
+
+	.bw-product-tabs__tablist {
+		display: inline-flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		align-items: center;
+		gap: 0.35rem;
+		margin: 0 auto;
+		padding: 0.4rem;
+		border: 1px solid var(--tabs-border);
+		border-radius: 999px;
+		background: var(--tabs-pill);
+	}
+
+	.bw-product-tabs__tab {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.8rem 1.25rem;
+		border: 0;
+		border-radius: 999px;
+		background: transparent;
+		color: var(--tabs-ink);
+		font: inherit;
+		font-size: 0.9rem;
+		font-weight: 600;
+		text-decoration: none;
+		cursor: pointer;
+		transition:
+			background-color 180ms ease,
+			box-shadow 180ms ease,
+			color 180ms ease,
+			transform 180ms ease;
+	}
+
+	.bw-product-tabs__tab:hover {
+		transform: translateY(-1px);
+	}
+
+	.bw-product-tabs__tab.is-active {
+		background: var(--tabs-paper);
+		box-shadow: var(--tabs-shadow);
+	}
+
+	.bw-product-tabs__panel {
+		display: grid;
+		gap: 1.5rem;
+		max-width: 64rem;
+		margin: 0 auto;
+		padding: clamp(1rem, 3vw, 1.5rem);
+		border-radius: clamp(1rem, 3vw, 1.5rem);
+		background: var(--tabs-paper);
+		box-shadow: var(--tabs-panel-shadow);
+		text-align: left;
+	}
+
+	.bw-product-tabs[data-tabs-ready='true'] .bw-product-tabs__panel:not(.is-active) {
+		display: none;
+	}
+
+	.bw-product-tabs.is-surface-outline .bw-product-tabs__panel {
+		box-shadow: none;
+		border: 1px solid var(--tabs-border);
+	}
+
+	.bw-product-tabs__media {
+		width: 100%;
+	}
+
+	.bw-product-tabs__media-frame {
+		position: relative;
+		width: 100%;
+		aspect-ratio: 16 / 9;
+		overflow: hidden;
+		border-radius: clamp(0.9rem, 2vw, 1.1rem);
+	}
+
+	.bw-product-tabs__media-frame.is-tone-blue {
+		background: linear-gradient(135deg, #6b8cba, #4a6d9c);
+	}
+
+	.bw-product-tabs__media-frame.is-tone-green {
+		background: linear-gradient(135deg, #5a9e6f, #3d7a52);
+	}
+
+	.bw-product-tabs__media-frame.is-tone-deep-blue {
+		background: linear-gradient(135deg, #5b7fb8, #3a5fa8);
+	}
+
+	.bw-product-tabs__media-frame.is-tone-graphite {
+		background: linear-gradient(135deg, #2a2a2a, #444);
+	}
+
+	.bw-product-tabs__media-frame.is-tone-clay {
+		background: linear-gradient(135deg, #b67d67, #8e5f4d);
+	}
+
+	.bw-product-tabs__media-placeholder,
+	.bw-product-tabs__image {
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
+	.bw-product-tabs__media-placeholder {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 1.25rem;
+		font-family: var(--bw-font-display);
+		font-size: clamp(2rem, 6vw, 4.6rem);
+		color: rgba(255, 255, 255, 0.54);
+		text-align: center;
+		text-wrap: balance;
+	}
+
+	.bw-product-tabs__image {
+		object-fit: cover;
+	}
+
+	.bw-product-tabs__media-badge {
+		position: absolute;
+		left: 1rem;
+		top: 1rem;
+		padding: 0.45rem 0.7rem;
+		border-radius: 999px;
+		background: rgba(255, 255, 255, 0.18);
+		backdrop-filter: blur(10px);
+		color: #fff;
+		font-size: 0.75rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+
+	.bw-product-tabs__panel-content {
+		display: grid;
+		gap: 0.9rem;
+	}
+
+	.bw-product-tabs__panel-title {
+		margin: 0;
+		font-family: var(--bw-font-display);
+		font-size: clamp(1.35rem, 2.4vw, 1.8rem);
+		line-height: 1.2;
+		letter-spacing: -0.02em;
+		text-wrap: balance;
+	}
+
+	.bw-product-tabs__panel-description {
+		max-width: 35rem;
+		font-size: 0.98rem;
+		line-height: 1.75;
+		color: var(--tabs-muted);
+	}
+
+	.bw-product-tabs__panel-description :first-child {
+		margin-top: 0;
+	}
+
+	.bw-product-tabs__panel-description :last-child {
+		margin-bottom: 0;
+	}
+
+	@media (min-width: 782px) {
+		.bw-product-tabs__inner {
+			gap: 1.75rem;
+		}
+
+		.bw-product-tabs__tab {
+			padding-inline: 2rem;
+		}
+	}
+</style>

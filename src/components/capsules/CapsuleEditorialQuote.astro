@@ -1,0 +1,211 @@
+---
+interface Props {
+	align?: 'wide' | 'full';
+	quote?: string;
+	name?: string;
+	role?: string;
+	mediaUrl?: string;
+	mediaAlt?: string;
+	layout?: 'portrait-end' | 'portrait-start';
+	tone?: 'sunrise' | 'sand' | 'ink';
+	surface?: 'soft' | 'outline';
+}
+
+const {
+	align = 'wide',
+	quote = '',
+	name = '',
+	role = '',
+	mediaUrl = '',
+	mediaAlt = '',
+	layout = 'portrait-end',
+	tone = 'sunrise',
+	surface = 'soft',
+} = Astro.props;
+---
+
+{quote ? (
+	<section class:list={['bw-shell', align === 'full' ? 'is-full' : 'is-wide']}>
+		<div
+			class:list={[
+				'bw-editorial-quote',
+				`is-layout-${layout}`,
+				`is-tone-${tone}`,
+				`is-surface-${surface}`,
+				mediaUrl ? 'has-media' : 'has-no-media',
+			]}
+		>
+			<div class="bw-editorial-quote__grid">
+				<div class="bw-editorial-quote__text">
+					<blockquote class="bw-editorial-quote__quote" set:html={quote} />
+
+					{name || role ? (
+						<div class="bw-editorial-quote__signature">
+							{name ? <p class="bw-editorial-quote__name">{name}</p> : null}
+							{role ? <p class="bw-editorial-quote__role">{role}</p> : null}
+						</div>
+					) : null}
+				</div>
+
+				<div class="bw-editorial-quote__media" aria-hidden={mediaUrl ? 'false' : 'true'}>
+					{mediaUrl ? (
+						<figure class="bw-editorial-quote__media-frame">
+							<img class="bw-editorial-quote__image" src={mediaUrl} alt={mediaAlt} />
+						</figure>
+					) : (
+						<div class="bw-editorial-quote__media-placeholder"></div>
+					)}
+				</div>
+			</div>
+		</div>
+	</section>
+) : null}
+
+<style>
+	.bw-editorial-quote {
+		--quote-paper: #f1d7b0;
+		--quote-ink: #4f433d;
+		--quote-line: rgba(79, 67, 61, 0.12);
+		--quote-muted: rgba(79, 67, 61, 0.75);
+		--quote-wash: linear-gradient(135deg, #e7b191, #eecf90);
+		position: relative;
+		overflow: clip;
+		border-radius: clamp(1rem, 2.5vw, 1.75rem);
+		background: var(--quote-wash);
+		color: var(--quote-ink);
+	}
+
+	.bw-editorial-quote.is-tone-sand {
+		--quote-paper: #efe5d4;
+		--quote-ink: #574c45;
+		--quote-line: rgba(87, 76, 69, 0.12);
+		--quote-muted: rgba(87, 76, 69, 0.72);
+		--quote-wash: linear-gradient(135deg, #e8d8bf, #f3e6c9);
+	}
+
+	.bw-editorial-quote.is-tone-ink {
+		--quote-paper: #191313;
+		--quote-ink: #f7efe6;
+		--quote-line: rgba(247, 239, 230, 0.12);
+		--quote-muted: rgba(247, 239, 230, 0.75);
+		--quote-wash: linear-gradient(135deg, #43302d, #181313);
+	}
+
+	.bw-editorial-quote.is-surface-outline {
+		background: transparent;
+		border: 1px solid var(--quote-line);
+	}
+
+	.bw-editorial-quote__grid {
+		display: grid;
+		gap: clamp(1.4rem, 4vw, 3.5rem);
+		padding: clamp(1.5rem, 5vw, 3rem) clamp(1.4rem, 4vw, 3rem) 0;
+	}
+
+	.bw-editorial-quote__text {
+		display: grid;
+		align-content: end;
+		gap: 1.5rem;
+		padding-bottom: clamp(1.4rem, 5vw, 4rem);
+	}
+
+	.bw-editorial-quote__quote {
+		margin: 0;
+		font-family: var(--bw-font-display);
+		font-size: clamp(1.45rem, 3.2vw, 2.15rem);
+		line-height: 1.5;
+		letter-spacing: -0.02em;
+	}
+
+	.bw-editorial-quote__quote > * {
+		margin: 0;
+	}
+
+	.bw-editorial-quote__signature {
+		display: grid;
+		gap: 0.2rem;
+	}
+
+	.bw-editorial-quote__name,
+	.bw-editorial-quote__role {
+		margin: 0;
+		font-size: 0.86rem;
+		line-height: 1.55;
+		color: var(--quote-muted);
+	}
+
+	.bw-editorial-quote__name {
+		font-weight: 700;
+		color: var(--quote-ink);
+	}
+
+	.bw-editorial-quote__media {
+		position: relative;
+		min-height: clamp(16rem, 58vw, 26rem);
+	}
+
+	.bw-editorial-quote__media-frame,
+	.bw-editorial-quote__media-placeholder {
+		position: relative;
+		height: 100%;
+		min-height: inherit;
+		margin: 0;
+		overflow: hidden;
+		border-radius: 0.75rem 0.75rem 0 0;
+		background: rgba(0, 0, 0, 0.08);
+	}
+
+	.bw-editorial-quote.is-tone-ink .bw-editorial-quote__media-frame,
+	.bw-editorial-quote.is-tone-ink .bw-editorial-quote__media-placeholder {
+		background: rgba(255, 255, 255, 0.08);
+	}
+
+	.bw-editorial-quote__media-placeholder::before {
+		content: '';
+		position: absolute;
+		inset: auto 50% 18% auto;
+		width: 46%;
+		aspect-ratio: 1;
+		border-radius: 999px;
+		background: rgba(255, 255, 255, 0.24);
+		transform: translateX(50%);
+	}
+
+	.bw-editorial-quote__media-placeholder::after {
+		content: '';
+		position: absolute;
+		left: 50%;
+		bottom: 0;
+		width: 64%;
+		height: 62%;
+		border-radius: 45% 45% 0 0;
+		background: rgba(255, 255, 255, 0.16);
+		transform: translateX(-50%);
+	}
+
+	.bw-editorial-quote__image {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	@media (min-width: 960px) {
+		.bw-editorial-quote__grid {
+			grid-template-columns: minmax(0, 1.15fr) minmax(16rem, 20rem);
+			align-items: end;
+		}
+
+		.bw-editorial-quote.is-layout-portrait-start .bw-editorial-quote__grid {
+			grid-template-columns: minmax(16rem, 20rem) minmax(0, 1.15fr);
+		}
+
+		.bw-editorial-quote.is-layout-portrait-start .bw-editorial-quote__media {
+			order: 1;
+		}
+
+		.bw-editorial-quote.is-layout-portrait-start .bw-editorial-quote__text {
+			order: 2;
+		}
+	}
+</style>

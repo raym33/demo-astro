@@ -1,0 +1,271 @@
+---
+import SiteIcon from '../system/SiteIcon.astro';
+
+interface Props {
+	align?: 'wide' | 'full';
+	eyebrow?: string;
+	title: string;
+	body?: string;
+	ctaLabel?: string;
+	ctaUrl?: string;
+	mediaUrl?: string;
+	mediaAlt?: string;
+	layout?: 'media-start' | 'media-end';
+	tone?: 'sand' | 'clay' | 'sage' | 'ink';
+	surface?: 'soft' | 'hard' | 'outline';
+}
+
+const {
+	align = 'wide',
+	eyebrow = '',
+	title,
+	body = '',
+	ctaLabel = '',
+	ctaUrl = '',
+	mediaUrl = '',
+	mediaAlt = '',
+	layout = 'media-start',
+	tone = 'sand',
+	surface = 'soft',
+} = Astro.props;
+---
+
+<section class:list={['bw-shell', align === 'full' ? 'is-full' : 'is-wide']}>
+	<div
+		class:list={[
+			'bw-feature-pair',
+			`is-layout-${layout}`,
+			`is-tone-${tone}`,
+			`is-surface-${surface}`,
+		]}
+	>
+		<div class="bw-feature-pair__grid">
+			<div class="bw-feature-pair__media">
+				{mediaUrl ? (
+					<figure class="bw-feature-pair__media-frame">
+						<img class="bw-feature-pair__image" src={mediaUrl} alt={mediaAlt || title} />
+					</figure>
+				) : (
+					<div class="bw-feature-pair__media-placeholder" />
+				)}
+			</div>
+
+			<div class="bw-feature-pair__content">
+				{eyebrow ? <p class="bw-feature-pair__eyebrow">{eyebrow}</p> : null}
+				<h2 class="bw-feature-pair__title">{title}</h2>
+				{body ? <div class="bw-feature-pair__body" set:html={body} /> : null}
+				{ctaLabel ? (
+					<div class="bw-feature-pair__cta-group">
+						<a class="bw-feature-pair__cta" href={ctaUrl || '#'}>
+							<span>{ctaLabel}</span>
+							<SiteIcon
+								name="arrow_outward"
+								size="sm"
+								className="bw-feature-pair__cta-icon"
+							/>
+						</a>
+					</div>
+				) : null}
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.bw-feature-pair {
+		--pair-paper: #f5efe4;
+		--pair-ink: #5c524b;
+		--pair-accent: #a57d5c;
+		--pair-panel: linear-gradient(135deg, #e8d5c4 0%, #c9b09a 100%);
+		--pair-line: rgba(92, 82, 75, 0.12);
+		--pair-muted: rgba(92, 82, 75, 0.8);
+		position: relative;
+		overflow: clip;
+		border-radius: clamp(1rem, 2.5vw, 1.5rem);
+		background: var(--pair-paper);
+	}
+
+	.bw-feature-pair.is-tone-clay {
+		--pair-paper: #f1e6da;
+		--pair-ink: #594843;
+		--pair-accent: #9e6758;
+		--pair-panel: linear-gradient(135deg, #d4b8a8 0%, #b09282 100%);
+	}
+
+	.bw-feature-pair.is-tone-sage {
+		--pair-paper: #edf2eb;
+		--pair-ink: #45514c;
+		--pair-accent: #5e786e;
+		--pair-panel: linear-gradient(135deg, #c0d0c8 0%, #8ca8a0 100%);
+	}
+
+	.bw-feature-pair.is-tone-ink {
+		--pair-paper: #1d1717;
+		--pair-ink: #f6efe8;
+		--pair-accent: #efb786;
+		--pair-panel: linear-gradient(135deg, #53423e 0%, #2d2523 100%);
+		--pair-line: rgba(246, 239, 232, 0.12);
+		--pair-muted: rgba(246, 239, 232, 0.76);
+	}
+
+	.bw-feature-pair.is-surface-hard {
+		box-shadow: inset 0 0 0 1px var(--pair-line);
+	}
+
+	.bw-feature-pair.is-surface-outline {
+		background: transparent;
+		border: 1px solid var(--pair-line);
+	}
+
+	.bw-feature-pair__grid {
+		display: grid;
+		gap: clamp(1.25rem, 4vw, 3rem);
+		padding: clamp(1.35rem, 4vw, 3.5rem);
+	}
+
+	.bw-feature-pair__media,
+	.bw-feature-pair__content {
+		min-width: 0;
+	}
+
+	.bw-feature-pair__media {
+		position: relative;
+		min-height: clamp(16rem, 60vw, 26rem);
+	}
+
+	.bw-feature-pair__media-frame,
+	.bw-feature-pair__media-placeholder {
+		position: relative;
+		height: 100%;
+		min-height: inherit;
+		overflow: hidden;
+		border-radius: 0.75rem;
+		background: var(--pair-panel);
+	}
+
+	.bw-feature-pair__media-placeholder::before,
+	.bw-feature-pair__media-placeholder::after {
+		content: '';
+		position: absolute;
+		border-radius: 999px;
+		opacity: 0.5;
+	}
+
+	.bw-feature-pair__media-placeholder::before {
+		inset: 14% auto auto 12%;
+		width: 38%;
+		aspect-ratio: 1;
+		background: rgba(255, 255, 255, 0.25);
+		filter: blur(8px);
+	}
+
+	.bw-feature-pair__media-placeholder::after {
+		right: 12%;
+		bottom: 12%;
+		width: 42%;
+		aspect-ratio: 1;
+		background:
+			repeating-linear-gradient(
+				135deg,
+				rgba(255, 255, 255, 0.18) 0,
+				rgba(255, 255, 255, 0.18) 0.75rem,
+				transparent 0.75rem,
+				transparent 1.5rem
+			),
+			linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0));
+	}
+
+	.bw-feature-pair__image {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.bw-feature-pair__content {
+		display: grid;
+		align-content: center;
+		gap: 1rem;
+	}
+
+	.bw-feature-pair__eyebrow {
+		margin: 0;
+		font-size: 0.8rem;
+		font-weight: 700;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--pair-accent);
+	}
+
+	.bw-feature-pair__title {
+		margin: 0;
+		max-width: 17ch;
+		font-family: var(--bw-font-display);
+		font-size: clamp(2rem, 4.6vw, 3rem);
+		font-weight: 400;
+		line-height: 1.1;
+		letter-spacing: -0.03em;
+		text-wrap: balance;
+	}
+
+	.bw-feature-pair__body {
+		max-width: 44rem;
+		font-size: clamp(1rem, 2vw, 1.08rem);
+		line-height: 1.75;
+		color: var(--pair-muted);
+	}
+
+	.bw-feature-pair__body :first-child {
+		margin-top: 0;
+	}
+
+	.bw-feature-pair__body :last-child {
+		margin-bottom: 0;
+	}
+
+	.bw-feature-pair__cta-group {
+		display: flex;
+		flex-wrap: wrap;
+		margin-top: 0.35rem;
+	}
+
+	.bw-feature-pair__cta {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.55rem;
+		min-height: 2.85rem;
+		padding: 0.8rem 1.15rem;
+		border-radius: 999px;
+		background: var(--pair-ink);
+		color: var(--pair-paper);
+		font-weight: 700;
+		text-decoration: none;
+		transition:
+			transform 180ms ease,
+			opacity 180ms ease;
+	}
+
+	.bw-feature-pair__cta:hover {
+		transform: translateY(-1px);
+		opacity: 0.96;
+	}
+
+	@media (min-width: 960px) {
+		.bw-feature-pair__grid {
+			grid-template-columns: minmax(18rem, 0.9fr) minmax(0, 1.1fr);
+			align-items: center;
+		}
+
+		.bw-feature-pair.is-layout-media-end .bw-feature-pair__grid {
+			grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.9fr);
+		}
+
+		.bw-feature-pair.is-layout-media-end .bw-feature-pair__media {
+			order: 2;
+		}
+
+		.bw-feature-pair.is-layout-media-end .bw-feature-pair__content {
+			order: 1;
+		}
+	}
+</style>

@@ -1,0 +1,163 @@
+---
+import ExampleSiteShell from '../../components/examples/ExampleSiteShell.astro';
+import CapsuleHero from '../../components/capsules/CapsuleHero.astro';
+import CapsuleFeaturePair from '../../components/capsules/CapsuleFeaturePair.astro';
+import CapsuleProductTabs from '../../components/capsules/CapsuleProductTabs.astro';
+import CapsuleResourceCards from '../../components/capsules/CapsuleResourceCards.astro';
+import CapsuleProofStrip from '../../components/capsules/CapsuleProofStrip.astro';
+import CapsuleJoinCta from '../../components/capsules/CapsuleJoinCta.astro';
+---
+
+<ExampleSiteShell
+	siteName="Fieldstone Living"
+	pageTitle="Residential Development Group"
+	description="Dummy Astro site for a residential development group."
+	variant="fieldstone"
+	tagline="Residential planning, launch strategy, and neighborhood delivery"
+	navItems={[
+		{ label: 'Projects', href: '#projects' },
+		{ label: 'Paths', href: '#paths' },
+		{ label: 'Contact', href: '#contact' },
+	]}
+	primaryLabel="Request availability"
+	primaryUrl="#contact"
+>
+	<CapsuleHero
+		align="full"
+		eyebrow="New addresses"
+		title="Homes, amenities, and launch material designed to feel dependable from day one."
+		intro="<p>Fieldstone Living develops residential projects with a steady balance between sales clarity, neighborhood identity, and practical long-term value.</p>"
+		ctaLabel="View project paths"
+		ctaUrl="#paths"
+		mediaUrl="/demo-media/fieldstone-hero.svg"
+		mediaAlt="Abstract residential facade placeholder"
+		theme="paper"
+		layout="split"
+		surface="hard"
+	/>
+
+	<section id="projects">
+		<CapsuleFeaturePair
+			eyebrow="Development approach"
+			title="Every launch is built around one simple promise: the place should feel coherent before a buyer even visits."
+			body="<p>That means better early messaging, clearer floor plan narratives, and a consistent visual system across web, onsite material, and buyer communication.</p>"
+			ctaLabel="See buyer paths"
+			ctaUrl="#paths"
+			mediaUrl="/demo-media/fieldstone-map.svg"
+			mediaAlt="Abstract plot map placeholder"
+			layout="media-start"
+			tone="sand"
+			surface="hard"
+		/>
+	</section>
+
+	<section id="paths">
+		<CapsuleProductTabs
+			align="full"
+			eyebrow="Audience paths"
+			heading="Different audiences arrive with different questions. The site should answer each one directly."
+			intro="<p>Residential buyers, investors, and landowners do not need the same story. A stronger property site creates a clear route for each.</p>"
+			theme="paper"
+			surface="soft"
+			items={[
+				{
+					label: 'Buyers',
+					title: 'A calmer buying path with unit, amenity, and financing clarity',
+					description: '<p>Show the location, residence mix, amenity logic, and key decision points without overwhelming the buyer in the first session.</p>',
+					mediaLabel: 'Buyers',
+					mediaUrl: '/demo-media/fieldstone-hero.svg',
+					mediaAlt: 'Abstract residential facade placeholder',
+					tone: 'clay',
+				},
+				{
+					label: 'Investors',
+					title: 'A focused layer for delivery logic, absorption, and neighborhood upside',
+					description: '<p>Investors need fewer lifestyle cues and more evidence around timeline, positioning, and stability of the overall product.</p>',
+					mediaLabel: 'Investors',
+					mediaUrl: '/demo-media/fieldstone-map.svg',
+					mediaAlt: 'Abstract map placeholder',
+					tone: 'graphite',
+				},
+				{
+					label: 'Landowners',
+					title: 'A partnership route that shows planning maturity and delivery credibility',
+					description: '<p>For landowners or local partners, the emphasis is on process, stewardship, and the ability to execute with discipline.</p>',
+					mediaLabel: 'Landowners',
+					mediaUrl: '/demo-media/fieldstone-hero.svg',
+					mediaAlt: 'Abstract development placeholder',
+					tone: 'green',
+				},
+			]}
+		/>
+	</section>
+
+	<CapsuleResourceCards
+		eyebrow="Engagement paths"
+		heading="Three commercial routes keep the project legible from first interest to signed decision."
+		intro="<p>The architecture of the site should match the architecture of the sale. People move faster when each next step is obvious.</p>"
+		layout="grid"
+		theme="paper"
+		surface="soft"
+		items={[
+			{
+				eyebrow: 'Path 01',
+				title: 'Early interest',
+				description: '<p>Waitlist signup, neighborhood overview, residence types, and launch updates for prospects who are still orienting.</p>',
+				meta: 'Discovery phase',
+				ctaLabel: 'Join waitlist',
+				ctaUrl: '#contact',
+				tone: 'accent',
+			},
+			{
+				eyebrow: 'Path 02',
+				title: 'Qualified buyers',
+				description: '<p>Priority access to plans, pricing ranges, and viewing sessions once interest becomes more concrete.</p>',
+				meta: 'Sales phase',
+				ctaLabel: 'Request details',
+				ctaUrl: '#contact',
+				tone: 'neutral',
+			},
+			{
+				eyebrow: 'Path 03',
+				title: 'Local partners',
+				description: '<p>A direct route for local collaborators, service providers, and land conversations attached to future phases.</p>',
+				meta: 'Partnerships',
+				ctaLabel: 'Contact team',
+				ctaUrl: '#contact',
+				tone: 'ink',
+			},
+		]}
+	/>
+
+	<CapsuleProofStrip
+		eyebrow="Market confidence"
+		heading="Property sites sell better when they feel precise, not inflated."
+		intro="<p>Fieldstone uses measured language, clean floor plan logic, and straightforward buyer paths. The result feels more credible than a louder sales deck.</p>"
+		layout="split"
+		theme="paper"
+		surface="hard"
+		featuredQuote="<p>The launch felt calm and organized. Buyers were not trying to decode the project — they were deciding if it fit them.</p>"
+		featuredName="Lydia Shaw"
+		featuredRole="Residential marketing lead"
+		items={[
+			{ value: '3', label: 'clear entry paths', detail: 'Buyers, investors, and land conversations separated from the start.', icon: 'layers', tone: 'accent' },
+			{ value: '12 weeks', label: 'launch runway', detail: 'Concept timeline used for a disciplined pre-sales setup.', icon: 'timeline', tone: 'neutral' },
+			{ value: '1 system', label: 'shared project language', detail: 'Web, collateral, and viewing flow speak the same visual language.', icon: 'task_alt', tone: 'neutral' },
+		]}
+	/>
+
+	<section id="contact">
+		<CapsuleJoinCta
+			eyebrow="Project contact"
+			title="Start with the right path: buyer interest, partner discussion, or future phase conversation."
+			body="<p>For residential launches, clarity in the first contact matters. This concept keeps those routes separate so every inquiry lands with the right context.</p>"
+			primaryLabel="Request current availability"
+			primaryUrl="#"
+			secondaryLabel="Discuss future phases"
+			secondaryUrl="#"
+			meta={['Residential launch', 'Investor route', 'Land conversations']}
+			theme="paper"
+			surface="soft"
+		/>
+	</section>
+</ExampleSiteShell>

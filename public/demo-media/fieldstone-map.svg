@@ -1,0 +1,15 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="900" fill="#ECE7DF"/>
+  <rect x="92" y="92" width="1016" height="716" rx="34" fill="#F8F4EE" stroke="#D0C4B7"/>
+  <path d="M194 194H1004V706H194V194Z" fill="#EEE6DA"/>
+  <path d="M194 194L508 390L700 286L1004 514" stroke="#B7A592" stroke-width="16"/>
+  <path d="M344 194V706" stroke="#D6C8B8" stroke-width="8"/>
+  <path d="M584 194V706" stroke="#D6C8B8" stroke-width="8"/>
+  <path d="M824 194V706" stroke="#D6C8B8" stroke-width="8"/>
+  <path d="M194 374H1004" stroke="#D6C8B8" stroke-width="8"/>
+  <path d="M194 554H1004" stroke="#D6C8B8" stroke-width="8"/>
+  <circle cx="508" cy="390" r="28" fill="#8E775F"/>
+  <circle cx="700" cy="286" r="28" fill="#8E775F"/>
+  <circle cx="1004" cy="514" r="28" fill="#8E775F"/>
+  <text x="94" y="70" fill="#806A53" font-family="Arial, sans-serif" font-size="22" letter-spacing="4">PLOT MAP / PLACEHOLDER</text>
+</svg>

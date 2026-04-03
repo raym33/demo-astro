@@ -1,0 +1,21 @@
+<svg width="1600" height="1080" viewBox="0 0 1600 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="140" y1="80" x2="1320" y2="980" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F5E5D6"/>
+      <stop offset="1" stop-color="#E4D0BF"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1080" fill="url(#bg)"/>
+  <rect x="162" y="132" width="1276" height="816" rx="46" fill="#F7F0E7" stroke="#D7BCA7"/>
+  <rect x="248" y="220" width="512" height="540" rx="34" fill="#E3C5AE"/>
+  <rect x="800" y="220" width="548" height="250" rx="34" fill="#F0E4D8"/>
+  <rect x="800" y="504" width="548" height="256" rx="34" fill="#CFAE94"/>
+  <rect x="308" y="278" width="116" height="420" rx="58" fill="#F7EEE4"/>
+  <rect x="456" y="332" width="196" height="330" rx="18" fill="#B68B73"/>
+  <rect x="876" y="286" width="214" height="22" rx="11" fill="#9C755F"/>
+  <rect x="876" y="336" width="342" height="22" rx="11" fill="#B38972"/>
+  <rect x="876" y="386" width="242" height="22" rx="11" fill="#B38972"/>
+  <circle cx="1114" cy="630" r="112" fill="#EAD6C7"/>
+  <circle cx="1114" cy="630" r="62" fill="#F7F0E7"/>
+  <text x="164" y="108" fill="#9C755F" font-family="Arial, sans-serif" font-size="24" letter-spacing="5">EDITORIAL INTERIOR / DUMMY VISUAL</text>
+</svg>

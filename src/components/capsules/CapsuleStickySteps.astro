@@ -1,0 +1,410 @@
+---
+interface StickyStepItem {
+	label?: string;
+	title?: string;
+	description?: string;
+	detail?: string;
+	mediaLabel?: string;
+	mediaUrl?: string;
+	mediaAlt?: string;
+}
+
+interface Props {
+	align?: 'wide' | 'full';
+	eyebrow?: string;
+	heading?: string;
+	intro?: string;
+	layout?: 'progressive' | 'stacked';
+	theme?: 'paper' | 'ink' | 'signal';
+	surface?: 'soft' | 'hard' | 'outline';
+	items: StickyStepItem[];
+}
+
+const {
+	align = 'wide',
+	eyebrow = '',
+	heading = '',
+	intro = '',
+	layout = 'progressive',
+	theme = 'ink',
+	surface = 'hard',
+	items = [],
+} = Astro.props;
+---
+
+{items.length ? (
+	<section class:list={['bw-shell', align === 'full' ? 'is-full' : 'is-wide']}>
+		<div
+			class:list={[
+				'bw-sticky-steps',
+				`is-layout-${layout}`,
+				`is-theme-${theme}`,
+				`is-surface-${surface}`,
+				`has-${items.length}-items`,
+			]}
+		>
+			<div class="bw-sticky-steps__inner">
+				{eyebrow || heading || intro ? (
+					<div class="bw-sticky-steps__header">
+						{eyebrow ? <p class="bw-sticky-steps__eyebrow">{eyebrow}</p> : null}
+						{heading ? <h2 class="bw-sticky-steps__heading">{heading}</h2> : null}
+						{intro ? <div class="bw-sticky-steps__intro" set:html={intro} /> : null}
+					</div>
+				) : null}
+
+				<ol class="bw-sticky-steps__steps">
+					{items.map((item, index) => (
+						<li class="bw-sticky-steps__item">
+							<article
+								class:list={[
+									'bw-sticky-steps__card',
+									item.mediaUrl ? 'has-media' : '',
+								]}
+							>
+								<div class="bw-sticky-steps__meta">
+									<span class="bw-sticky-steps__index">
+										{String(index + 1).padStart(2, '0')}
+									</span>
+									{item.label ? (
+										<p class="bw-sticky-steps__label">{item.label}</p>
+									) : null}
+								</div>
+
+								<div class="bw-sticky-steps__content">
+									<div class="bw-sticky-steps__copy">
+										{item.title ? (
+											<h3 class="bw-sticky-steps__title">{item.title}</h3>
+										) : null}
+										{item.description ? (
+											<div
+												class="bw-sticky-steps__description"
+												set:html={item.description}
+											/>
+										) : null}
+										{item.detail ? (
+											<p class="bw-sticky-steps__detail">{item.detail}</p>
+										) : null}
+									</div>
+
+									<div class="bw-sticky-steps__media">
+										{item.mediaUrl ? (
+											<img
+												class="bw-sticky-steps__image"
+												src={item.mediaUrl}
+												alt={
+													item.mediaAlt ||
+													item.title ||
+													item.label ||
+													`Step ${String(index + 1).padStart(2, '0')}`
+												}
+											/>
+										) : (
+											<div class="bw-sticky-steps__fallback">
+												<span class="bw-sticky-steps__fallback-badge">
+													{item.mediaLabel ||
+														item.label ||
+														`Step ${String(index + 1).padStart(2, '0')}`}
+												</span>
+											</div>
+										)}
+									</div>
+								</div>
+							</article>
+						</li>
+					))}
+				</ol>
+			</div>
+		</div>
+	</section>
+) : null}
+
+<style>
+	.bw-sticky-steps {
+		--sticky-bg: #f2ede6;
+		--sticky-card: rgba(255, 255, 255, 0.72);
+		--sticky-ink: #27211e;
+		--sticky-muted: rgba(39, 33, 30, 0.72);
+		--sticky-line: rgba(39, 33, 30, 0.14);
+		--sticky-accent: #3d7a63;
+		--sticky-shadow: 0 18px 48px rgba(39, 33, 30, 0.09);
+		position: relative;
+		overflow: clip;
+		border-radius: clamp(1rem, 2.5vw, 1.8rem);
+		background: var(--sticky-bg);
+		color: var(--sticky-ink);
+	}
+
+	.bw-sticky-steps.is-theme-ink {
+		--sticky-bg: #111313;
+		--sticky-card: rgba(242, 248, 245, 0.06);
+		--sticky-ink: #eef4f1;
+		--sticky-muted: rgba(238, 244, 241, 0.72);
+		--sticky-line: rgba(238, 244, 241, 0.12);
+		--sticky-accent: #7bc5a7;
+		--sticky-shadow: 0 24px 56px rgba(0, 0, 0, 0.3);
+	}
+
+	.bw-sticky-steps.is-theme-signal {
+		--sticky-bg: #efe0d2;
+		--sticky-card: rgba(255, 248, 242, 0.78);
+		--sticky-ink: #33231b;
+		--sticky-muted: rgba(51, 35, 27, 0.74);
+		--sticky-line: rgba(51, 35, 27, 0.14);
+		--sticky-accent: #bf5b31;
+		--sticky-shadow: 0 20px 50px rgba(96, 54, 33, 0.12);
+	}
+
+	.bw-sticky-steps.is-surface-hard {
+		--sticky-card: rgba(255, 255, 255, 0.9);
+	}
+
+	.bw-sticky-steps.is-theme-ink.is-surface-hard {
+		--sticky-card: rgba(242, 248, 245, 0.1);
+	}
+
+	.bw-sticky-steps.is-theme-signal.is-surface-hard {
+		--sticky-card: rgba(255, 248, 242, 0.92);
+	}
+
+	.bw-sticky-steps.is-surface-outline {
+		background: transparent;
+		border: 1px solid var(--sticky-line);
+	}
+
+	.bw-sticky-steps__inner {
+		display: grid;
+		gap: clamp(1.3rem, 3vw, 2.4rem);
+		padding: clamp(1.3rem, 4vw, 3rem);
+	}
+
+	.bw-sticky-steps__header {
+		display: grid;
+		gap: 1rem;
+		align-content: start;
+		min-width: 0;
+	}
+
+	.bw-sticky-steps__eyebrow {
+		margin: 0;
+		font-size: 0.8rem;
+		font-weight: 700;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--sticky-accent);
+	}
+
+	.bw-sticky-steps__heading {
+		margin: 0;
+		max-width: 16ch;
+		font-family: var(--bw-font-display);
+		font-size: clamp(2rem, 4.8vw, 3.2rem);
+		line-height: 1.04;
+		letter-spacing: -0.04em;
+		text-wrap: balance;
+	}
+
+	.bw-sticky-steps__intro {
+		max-width: 46rem;
+		font-size: clamp(1rem, 2vw, 1.05rem);
+		line-height: 1.72;
+		color: var(--sticky-muted);
+	}
+
+	.bw-sticky-steps__intro :first-child {
+		margin-top: 0;
+	}
+
+	.bw-sticky-steps__intro :last-child {
+		margin-bottom: 0;
+	}
+
+	.bw-sticky-steps__steps {
+		display: grid;
+		gap: 1rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.bw-sticky-steps__item {
+		list-style: none;
+	}
+
+	.bw-sticky-steps__card {
+		display: grid;
+		gap: 1rem;
+		padding: clamp(1rem, 2vw, 1.45rem);
+		border: 1px solid var(--sticky-line);
+		border-radius: 1.1rem;
+		background: var(--sticky-card);
+		box-shadow: var(--sticky-shadow);
+	}
+
+	.bw-sticky-steps__meta {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.75rem;
+	}
+
+	.bw-sticky-steps__index {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-width: 2.8rem;
+		padding: 0.45rem 0.7rem;
+		border-radius: 999px;
+		background: color-mix(in srgb, var(--sticky-accent) 16%, transparent);
+		font-size: 0.78rem;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--sticky-accent);
+	}
+
+	.bw-sticky-steps__label {
+		margin: 0;
+		font-size: 0.76rem;
+		font-weight: 700;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--sticky-muted);
+	}
+
+	.bw-sticky-steps__content {
+		display: grid;
+		gap: 1rem;
+	}
+
+	.bw-sticky-steps__copy {
+		display: grid;
+		gap: 0.8rem;
+		align-content: start;
+	}
+
+	.bw-sticky-steps__title {
+		margin: 0;
+		font-family: var(--bw-font-display);
+		font-size: clamp(1.35rem, 2.8vw, 2.15rem);
+		line-height: 1.06;
+		letter-spacing: -0.035em;
+		text-wrap: balance;
+	}
+
+	.bw-sticky-steps__description {
+		font-size: 0.98rem;
+		line-height: 1.7;
+		color: var(--sticky-muted);
+	}
+
+	.bw-sticky-steps__description :first-child {
+		margin-top: 0;
+	}
+
+	.bw-sticky-steps__description :last-child {
+		margin-bottom: 0;
+	}
+
+	.bw-sticky-steps__detail {
+		margin: 0;
+		font-size: 0.76rem;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--sticky-accent);
+	}
+
+	.bw-sticky-steps__media {
+		display: grid;
+		align-items: stretch;
+		min-height: 10rem;
+	}
+
+	.bw-sticky-steps__image {
+		display: block;
+		width: 100%;
+		height: 100%;
+		min-height: 10rem;
+		border-radius: 0.95rem;
+		object-fit: cover;
+	}
+
+	.bw-sticky-steps__fallback {
+		display: grid;
+		place-items: end start;
+		min-height: 10rem;
+		padding: 1rem;
+		border-radius: 0.95rem;
+		background:
+			linear-gradient(135deg, rgba(255, 255, 255, 0.16), transparent 58%),
+			var(--sticky-card);
+	}
+
+	.bw-sticky-steps__fallback-badge {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-width: 4.8rem;
+		padding: 0.42rem 0.72rem;
+		border-radius: 999px;
+		background: rgba(255, 255, 255, 0.68);
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: #1f1a17;
+	}
+
+	@media (min-width: 760px) {
+		.bw-sticky-steps__card.has-media .bw-sticky-steps__content {
+			grid-template-columns: minmax(0, 1.3fr) minmax(11rem, 15rem);
+			align-items: stretch;
+		}
+	}
+
+	@media (min-width: 900px) {
+		.bw-sticky-steps.is-layout-progressive .bw-sticky-steps__inner {
+			grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+			align-items: start;
+		}
+
+		.bw-sticky-steps.is-layout-progressive .bw-sticky-steps__header {
+			position: sticky;
+			top: clamp(4.5rem, 10vh, 7rem);
+		}
+
+		.bw-sticky-steps.is-layout-progressive .bw-sticky-steps__item {
+			padding-bottom: clamp(2.8rem, 6vh, 4.5rem);
+		}
+
+		.bw-sticky-steps.is-layout-progressive .bw-sticky-steps__item:last-child {
+			padding-bottom: 0;
+		}
+
+		.bw-sticky-steps.is-layout-progressive .bw-sticky-steps__card {
+			position: sticky;
+			top: clamp(5rem, 11vh, 7.5rem);
+			min-height: clamp(17rem, 32vw, 20rem);
+		}
+
+		.bw-sticky-steps.is-layout-progressive .bw-sticky-steps__item:nth-child(2) .bw-sticky-steps__card {
+			top: clamp(6rem, 13vh, 8.5rem);
+		}
+
+		.bw-sticky-steps.is-layout-progressive .bw-sticky-steps__item:nth-child(3) .bw-sticky-steps__card {
+			top: clamp(7rem, 15vh, 9.5rem);
+		}
+
+		.bw-sticky-steps.is-layout-progressive .bw-sticky-steps__item:nth-child(4) .bw-sticky-steps__card {
+			top: clamp(8rem, 17vh, 10.5rem);
+		}
+
+		.bw-sticky-steps.is-layout-progressive .bw-sticky-steps__item:nth-child(5) .bw-sticky-steps__card {
+			top: clamp(9rem, 19vh, 11.5rem);
+		}
+
+		.bw-sticky-steps.is-layout-progressive .bw-sticky-steps__item:nth-child(6) .bw-sticky-steps__card {
+			top: clamp(10rem, 21vh, 12.5rem);
+		}
+	}
+</style>

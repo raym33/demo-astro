@@ -1,0 +1,185 @@
+---
+interface FaqItem {
+	question: string;
+	answer: string;
+}
+
+interface Props {
+	align?: 'wide' | 'full';
+	eyebrow?: string;
+	heading?: string;
+	intro?: string;
+	theme?: 'paper' | 'signal' | 'ink';
+	items: FaqItem[];
+}
+
+const {
+	align = 'wide',
+	eyebrow = '',
+	heading = '',
+	intro = '',
+	theme = 'paper',
+	items = [],
+} = Astro.props;
+---
+
+{items.length ? (
+	<section class:list={['bw-shell', align === 'full' ? 'is-full' : 'is-wide']}>
+		<div class:list={['bw-faq-list', `is-theme-${theme}`]}>
+			<div class="bw-faq-list__inner">
+				<header class="bw-faq-list__header">
+					{eyebrow ? <p class="bw-faq-list__eyebrow">{eyebrow}</p> : null}
+					{heading ? <h2 class="bw-faq-list__heading">{heading}</h2> : null}
+					{intro ? <div class="bw-faq-list__intro" set:html={intro} /> : null}
+				</header>
+
+				<div class="bw-faq-list__items">
+					{items.map((item, index) => (
+						<details class="bw-faq-list__item" open={index === 0}>
+							<summary class="bw-faq-list__question">{item.question}</summary>
+							<div class="bw-faq-list__answer">
+								<p>{item.answer}</p>
+							</div>
+						</details>
+					))}
+				</div>
+			</div>
+		</div>
+	</section>
+) : null}
+
+<style>
+	.bw-faq-list {
+		--faq-bg: #f3ece4;
+		--faq-panel: rgba(255, 255, 255, 0.86);
+		--faq-ink: #221b17;
+		--faq-muted: rgba(34, 27, 23, 0.74);
+		--faq-line: rgba(34, 27, 23, 0.12);
+		--faq-accent: #c8643e;
+		border-radius: clamp(1.1rem, 2.6vw, 1.7rem);
+		background:
+			radial-gradient(circle at top right, rgba(200, 100, 62, 0.1), transparent 26%),
+			var(--faq-bg);
+		color: var(--faq-ink);
+	}
+
+	.bw-faq-list.is-theme-signal {
+		--faq-bg: #f5dfcf;
+		--faq-accent: #cf5a2f;
+	}
+
+	.bw-faq-list.is-theme-ink {
+		--faq-bg: #171413;
+		--faq-panel: rgba(255, 250, 247, 0.08);
+		--faq-ink: #f7efe8;
+		--faq-muted: rgba(247, 239, 232, 0.72);
+		--faq-line: rgba(247, 239, 232, 0.12);
+		--faq-accent: #f2b58e;
+	}
+
+	.bw-faq-list__inner {
+		display: grid;
+		gap: 1rem;
+		padding: clamp(1.2rem, 3.6vw, 2.4rem);
+	}
+
+	.bw-faq-list__header {
+		display: grid;
+		gap: 0.85rem;
+	}
+
+	.bw-faq-list__eyebrow {
+		margin: 0;
+		font-size: 0.8rem;
+		font-weight: 700;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--faq-accent);
+	}
+
+	.bw-faq-list__heading {
+		margin: 0;
+		max-width: 18ch;
+		font-family: var(--bw-font-display);
+		font-size: clamp(1.9rem, 4vw, 2.8rem);
+		line-height: 1.04;
+		letter-spacing: -0.04em;
+		text-wrap: balance;
+	}
+
+	.bw-faq-list__intro {
+		max-width: 44rem;
+		font-size: 1rem;
+		line-height: 1.7;
+		color: var(--faq-muted);
+	}
+
+	.bw-faq-list__intro :first-child {
+		margin-top: 0;
+	}
+
+	.bw-faq-list__intro :last-child {
+		margin-bottom: 0;
+	}
+
+	.bw-faq-list__items {
+		display: grid;
+		gap: 0.85rem;
+	}
+
+	.bw-faq-list__item {
+		border: 1px solid var(--faq-line);
+		border-radius: 1.1rem;
+		background: var(--faq-panel);
+		overflow: hidden;
+	}
+
+	.bw-faq-list__question {
+		position: relative;
+		display: block;
+		padding: 1rem 3.2rem 1rem 1rem;
+		cursor: pointer;
+		list-style: none;
+		font-size: 1rem;
+		font-weight: 800;
+		line-height: 1.45;
+	}
+
+	.bw-faq-list__question::-webkit-details-marker {
+		display: none;
+	}
+
+	.bw-faq-list__question::after {
+		content: '+';
+		position: absolute;
+		top: 50%;
+		right: 1rem;
+		transform: translateY(-50%);
+		font-size: 1.35rem;
+		font-weight: 500;
+		color: var(--faq-accent);
+	}
+
+	.bw-faq-list__item[open] .bw-faq-list__question::after {
+		content: '−';
+	}
+
+	.bw-faq-list__answer {
+		padding: 0 1rem 1rem;
+		font-size: 0.98rem;
+		line-height: 1.72;
+		color: var(--faq-muted);
+	}
+
+	.bw-faq-list__answer p {
+		margin: 0;
+	}
+
+	@media (min-width: 980px) {
+		.bw-faq-list__inner {
+			grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+			align-items: start;
+			gap: 1.6rem 2rem;
+		}
+	}
+</style>
